@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    <title>Geocode Details</title>
+
+    <link rel="stylesheet" href="http://js.arcgis.com/3.9/js/dojo/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="http://js.arcgis.com/3.9/js/esri/css/esri.css">
+    <style>
+      html, body, #map {
+        height:100%;
+        width:100%;
+        margin:0;
+        padding:0;
+      }
+      #search {
+        display: block;
+        position: absolute;
+        z-index: 2;
+        top: 20px;
+        left: 74px;
+      }	
+    </style>
+
+    <script src="http://js.arcgis.com/3.9/"></script>
+    <script>
+      var locator, map;
+      
+      require([
+        "esri/map", "esri/tasks/locator", 
+        "esri/SpatialReference", 
+        "esri/geometry/Point", "esri/geometry/Extent",
+        "esri/geometry/webMercatorUtils",
+        "dojo/number", "dojo/parser", "dojo/dom", "dojo/json", "dijit/registry",
+        "dijit/form/Button", "dijit/form/Textarea",
+        "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dojo/domReady!"
+      ], function(
+        Map, Locator, 
+        SpatialReference,
+        Point, Extent,
+        webMercatorUtils,
+        number, parser, dom, JSON, registry
+      ) {
+        parser.parse();
+
+        map = new Map("map",{
+          basemap: "topo",
+          center: [-96.311, 43.676],
+          zoom: 3
+        });
+
+        locator = new Locator("http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer");
+
+        //Draw and zoom to the result when the geocoding is complete                
+        locator.on("address-to-locations-complete", function(evt) {
+
+          var ptAttr = evt.addresses[0].attributes;
+          var minx = parseFloat(ptAttr.Xmin);
+          var maxx = parseFloat(ptAttr.Xmax);
+          var miny = parseFloat(ptAttr.Ymin);
+          var maxy = parseFloat(ptAttr.Ymax);
+
+          var esriExtent = new Extent(minx, miny, maxx, maxy, new SpatialReference({wkid:4326}));
+          map.setExtent(webMercatorUtils.geographicToWebMercator(esriExtent));
+
+        });
+
+      });
+	  
+	    //Perform the geocode. This function runs when the "Locate" button is pushed.            
+        function locate() {
+          var address = {
+             //SingleLine: dom.byId("address").value
+			 SingleLine: dojo.byId("srchBox").value
+          };
+          var options = {
+            address: address,
+            outFields: ["*"]
+          };
+          //optionally return the out fields if you need to calculate the extent of the geocoded point
+          locator.addressToLocations(options);
+        }
+      
+      function zoomTo(lat, lon) {
+        require([
+          "esri/geometry/Point", "esri/geometry/webMercatorUtils"
+        ], function(Point, webMercatorUtils) {
+          var point = new Point(lon, lat, {
+            wkid: "4326"
+          });
+          var wmpoint = webMercatorUtils.geographicToWebMercator(point);
+          map.centerAt(wmpoint);
+        });
+      }
+	  
+	  function validateSearch(){
+	  
+		var inputText = dojo.byId("srchBox").value;
+	  
+		//first check if string is all numbers and between 8-15 characters
+		if (inputText.match(/^\d*[0-9](\.\d*[0-9])?$/) && (inputText.length >= 8 && inputText.length <= 15)) {
+			alert("Valid USGS site number");
+			doSearchSites(inputText);
+		} else {
+			alert("Doing regular location search");
+			locate(inputText);
+		}
+	  }
+	  
+		function doSearchSites(siteNoOrName){
+
+			var srchText = siteNoOrName;
+
+			// return if blank
+			if (srchText === "") {return;}
+
+			// trim spaces from ends
+			//srchText = srchText.trim();
+			srchText.replace(/\s/g, "");
+
+			// for site numbers, search for spaces and convert to commas
+			if (srchText.indexOf(" ") > -1) {
+					srchText = srchText.replace(/ /g,",");
+				}
+
+			// build the web services request URL
+			var web_proxy_url = "http://maps.waterdata.usgs.gov/mapper/nwissitesmapper/nwis/inventory?format=sitefile_output"
+			+ "&sitefile_output_format=xml&column_name=site_no"
+			+ "&column_name=dec_long_va&column_name=dec_lat_va"
+			+ "&column_name=site_active_fg&column_name=site_tp_cd&column_name=station_nm"
+
+			web_proxy_url += "&site_no=" + srchText;
+
+			// set the xhrGet properties
+			var urlObj = esri.urlToObject(web_proxy_url);
+
+			var siteFileRequest = {
+				url: urlObj.path,
+				handleAs: "xml",
+				content: urlObj.query,
+				load: zoomToSites,
+				error: errZoomToSites
+			}
+
+			//srchSitesStandby.show();
+
+			// AJAX call to fetch sites
+			var deferred = dojo.xhrGet(siteFileRequest);
+		}
+		
+		function zoomToSites(xml, ioargs) {
+			var markers;
+			var i;
+			var search_sites = xml.getElementsByTagName("site");
+
+			// if no sites then return
+			if (search_sites.length == 0 || xml == null){
+				//srchSitesStandby.hide();
+				showErrBox("No Site(s) Found");
+				return;
+			}
+
+			// keep a count of the markers
+			var nsites = 0;
+			var sitesAndStatus = "";
+
+			// loop through the sites
+			while (nsites < search_sites.length ) {
+
+				// get the data
+				var longDD = parseFloat(search_sites[nsites].getElementsByTagName("dec_long_va")[0].firstChild.nodeValue);
+				var latDD = parseFloat(search_sites[nsites].getElementsByTagName("dec_lat_va")[0].firstChild.nodeValue);
+				var cat_code = search_sites[nsites].getElementsByTagName("site_tp_cd")[0].firstChild.nodeValue;
+				var activeCode = search_sites[nsites].getElementsByTagName("site_active_fg")[0].firstChild.nodeValue;
+				
+				//set agc_code based on new active definition
+				if (activeCode == 1) { var agc_code = "A"; }
+				else { var agc_code = "I"; }
+
+				//create point
+				var point = new esri.geometry.Point(longDD,latDD, new esri.SpatialReference({ wkid: 4326 }));
+
+				// build a set of key pairs for each site type and status
+				if (cat_code) {
+					sitesAndStatus += cat_code + ",";
+					if (agc_code) {
+						sitesAndStatus += agc_code + ",";
+					} else {
+						sitesAndStatus += "I,";
+					}
+				}
+
+				// if this is the first site build a small bounding box around the point
+				if (nsites == 0) {
+					var minX = parseFloat(point.x)
+					var minY = parseFloat(point.y)
+					var maxX = parseFloat(point.x)
+					var maxY = parseFloat(point.y)
+				} else {
+					if (point.x < minX) { minX = point.x; }
+					if (point.y < minY) { minY = point.y; }
+					if (point.x > maxX) { maxX = point.x; }
+					if (point.y > maxY) { maxY = point.y; }
+				}
+				nsites++;
+			}
+
+			// set the map extent
+			minX = minX - 0.1;
+			minY = minY - 0.1;
+			maxX = maxX + 0.1;
+			maxY = maxY + 0.1;
+			var hullExtent = new esri.geometry.Extent(minX, minY, maxX, maxY, new esri.SpatialReference({wkid: 4326}));
+
+			// split the string into tokens for the site types and status
+			var sTokens = sitesAndStatus.split(",");
+
+			// create a dojo.defer so that the checkbox is set before zooming map
+			searchZoomDef = new dojo.Deferred();
+
+			// zoom the map to the calculated extent
+			zoomSearchSite(hullExtent);
+		}
+
+		function errZoomToSites() {
+			//srchSitesStandby.hide();
+			showErrBox("No Site(s) Found");
+			
+			//locate();
+		}
+		
+		function zoomSearchSite(hull) {
+			map.setExtent(esri.geometry.geographicToWebMercator(hull));
+			searchZoomDef.resolve({called:true});
+		}
+		
+		function resetLocSearch(srchCode) {
+
+			if (srchCode == 3) {
+				dojo.byId("srchBox").value = "";
+			} 
+		}
+		
+		// error box
+		function showErrBox(errMessage) {
+			var errBox = dijit.byId('errExpDialog');
+			errBox.set("content", "<img src='./images/GenericWarning16.png'> &nbsp;" + errMessage + "&nbsp;&nbsp;");
+			errBox.show();
+		}
+		
+    </script> 
+  </head>
+  
+  <body class="claro">
+    <div data-dojo-type="dijit/layout/BorderContainer" 
+         data-dojo-props="gutters:false, design:'sidebar'" 
+         style="width:100%;height:100%;">
+
+      <div id="map" 
+           data-dojo-type="dijit/layout/ContentPane" 
+           data-dojo-props="region:'center'">
+      </div>
+	  
+	  <!--
+	  	<div id="search" class="simpleGeocoder" role="presentation" widgetid="search">
+			Universal Search (accepts USGS siteNo or geographic location)<br />
+			<input id="srchBox" data-dojo-type="dijit.form.TextBox" data-dojo-props="value:'Enter Site Number(s)', onClick:function() {resetLocSearch(3);}" >
+			<div data-dojo-type="dijit.form.Button" id="srchGoSites" data-dojo-props="iconClass:'search_icon', onClick:function() {validateSearch();} "></div>
+		</div>
+		-->
+
+		<div id="search" class="simpleGeocoder" role="presentation" widgetid="search">
+			<div class="esriGeocoderContainer" role="presentation">
+				<div class="esriGeocoder" role="presentation" data-dojo-attach-point="containerNode">
+					<div class="esriGeocoderSearch esriGeocoderIcon" role="button" data-dojo-attach-point="submitNode" tabindex="0" title="" ></div>
+					<div id="search_menu_button" class="esriGeocoderMenuArrow esriGeocoderIcon" aria-expanded="false" role="button" data-dojo-attach-point="geocoderMenuArrowNode" tabindex="0" title="Change Geocoder" aria-haspopup="true" style="display: none;"></div>
+					<input id="srchBox" type="text" role="textbox" data-dojo-attach-point="inputNode" autocomplete="off" value="" placeholder="" tabindex="0" aria-haspopup="true" onkeydown="if (event.keyCode == 13) validateSearch()">
+					<div class="esriGeocoderClearFloat" role="presentation"></div>
+				</div>
+			</div>
+		</div>
+	  
+	  	<div id="errExpDialog" data-dojo-type="dijit.Dialog">
+	</div>
+
+
+    </div>
+  </body>
+
+</html>

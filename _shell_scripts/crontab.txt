@@ -1,0 +1,2 @@
+*/5 * * * * /home/ubuntu/scripts/chkCherry.sh
+0 0 * * 0 rm -rf /var/www/mapper/exporter/temp/*

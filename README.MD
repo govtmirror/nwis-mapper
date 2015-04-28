@@ -2,14 +2,26 @@
 
 > codebase for NWIS mapper
 
+## Server setup
 
-## Project setup
+#### 1.  Install required software 
 
-#### 1.  Install required software (see Getting Started above before proceeding)
-[CherryPy](http://www.cherrypy.org/)   
-[node.js](http://nodejs.org)  
+```bash
+sudo apt-get install python
+sudo apt-get install python-pip
+pip install Mako
+pip install cherrypy
+```
 
-#### 2.  Install global dependencies
+#### 2.  Add crontab entries
+
+```bash
+*/5 * * * * /home/ubuntu/scripts/chkCherry.sh
+0 0 * * 0 rm -rf /var/www/mapper/exporter/temp/*
+```
+
+
+#### 3.  Install global dependencies
 ```bash
 npm install -g bower gulp
 ```

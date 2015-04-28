@@ -14,6 +14,8 @@ pip install cherrypy
 ```
 
 #### 2.  Add crontab entries
+The chkCherry.sh shell script ensures the set of python scripts that use cherrypy are running
+The second line clears out the exporter temp folder every week
 
 ```bash
 */5 * * * * /home/ubuntu/scripts/chkCherry.sh

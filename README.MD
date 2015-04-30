@@ -9,8 +9,13 @@
 ```bash
 sudo apt-get install python
 sudo apt-get install python-pip
-pip install Mako
-pip install cherrypy
+sudo apt-get install git
+sudo apt-get install libgeos-dev
+sudo apt-get install apache2
+sudo pip install Mako
+sudo pip install cherrypy
+sudo pip install xlwt
+sudo pip install shapely
 ```
 
 #### 2.  Add crontab entries
@@ -23,7 +28,18 @@ The second line clears out the exporter temp folder every week
 ```
 
 
-#### 3.  Install global dependencies
+#### 3.  Configure apache for proxy rewrites
+
+enable apache mod-rewrite
 ```bash
-npm install -g bower gulp
+sudo a2enmod rewrite
+```
+
+allow rewrites from /mapper folder.  add this to /etc/apache2/sites-available/000-default
+```bash
+<Directory /var/www/mapper>
+		AllowOverride All
+		Order Allow,Deny
+		Allow from all
+</Directory>
 ```

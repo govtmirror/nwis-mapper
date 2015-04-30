@@ -3966,8 +3966,9 @@ function getAquifer(mapPoint) {
 	aqMapY = mapPoint.y.toFixed(1);
 
 	// build web service URL
-	aqURL = "./aquifers/?ptInfo=" +
-	map.getLevel() + "," + aqMapX + "," + aqMapY
+	//http://localhost/mapper/tileRGB/?tileURL=nwis-mapper.s3.amazonaws.com/pr_aq&ptInfo=11,-13264777.4,4996198.3&cacheInfo=aquifers,TMS,png
+	aqURL = "./tileRGB/?tileURL=nwis-mapper.s3.amazonaws.com/pr_aq&ptInfo=" +
+	map.getLevel() + "," + aqMapX + "," + aqMapY + "&cacheInfo=aquifers,TMS,png"
 
 	// set the xhrGet properties
 	var urlObj = esri.urlToObject(aqURL);
@@ -3994,15 +3995,15 @@ function showAquifer(xml, ioargs){
 	var aquifers = xml.getElementsByTagName("aquifers");
 	if (aquifers.length == 0) {return;}
 
-	//
-	var aquifer = aquifers[0].getElementsByTagName("aquifer");
-	var aqName = aquifer[0].getAttribute("name");
-	var aqRed = aquifer[0].getAttribute("red");
-	var aqGreen = aquifer[0].getAttribute("green");
-	var aqBlue =  aquifer[0].getAttribute("blue");
 	
-	var aqDivStyle = '<span style="display:inline-block; width:20px; height:20px; background-color:rgb(' +
-		aqRed + ',' + aqGreen + ',' + aqBlue + ');"></span>';
+	var aquifer = aquifers[0].getElementsByTagName("feature");
+	console.log(aquifer);
+	var aqName = aquifer[0].getAttribute("name");
+	//var aqRed = aquifer[0].getAttribute("red");
+	//var aqGreen = aquifer[0].getAttribute("green");
+	//var aqBlue =  aquifer[0].getAttribute("blue");
+	
+	//var aqDivStyle = '<span style="display:inline-block; width:20px; height:20px; background-color:rgb(' + aqRed + ',' + aqGreen + ',' + aqBlue + ');"></span>';
 
 	var aqHTML = '<table border="0" width="290">' +
 					'<thead>' +
@@ -4293,4 +4294,3 @@ String.prototype.shorten = function(maxLength) {
   }
   return result;
 }
-

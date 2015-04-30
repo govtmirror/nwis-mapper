@@ -231,7 +231,7 @@ class root:
 			tileFile = tileFile + esriLevel + "/" + esriRow + "/" + esriCol + "." + cacheExt
 
 		else:
-			tileFile = tileFile + zoomLevel + "/" + mercX + "/" + mercY + "." + cacheExt
+			tileFile = tileFile + str(zoomLevel) + "/" + str(googleY) + "/" + str(googleX) + "." + cacheExt
 
 		# we have the point the user clicked on and we figured out from that
 		# coordinate which tile was clicked on. Now we need the origin of that tile

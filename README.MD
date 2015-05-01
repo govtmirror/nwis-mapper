@@ -10,7 +10,7 @@ get and run setup script
 ```bash
 cd
 wget https://raw.githubusercontent.com/USGS-OWI/nwis-mapper/master/server-config/server-setup.sh
-OR "wget http://bit.ly/1HYyr0d" AND "mv 1HYyr0d server-setup.sh"
+OR "curl -L http://bit.ly/1HYyr0d -o server-setup.sh"
 sudo sh server-setup.sh
 ```
 
@@ -21,8 +21,8 @@ bash script contents
 #args
 USER_HOME=$(getent passwd $SUDO_USER | cut -d: -f6)
 USER=$SUDO_USER
-LIST_OF_MAIN_APPS="python python-pip git libgeos-dev apache2"
-LIST_OF_PYTHON_APPS="Mako cherrypy xlwt shapely"
+LIST_OF_MAIN_APPS="python python-pip git libgeos-dev libjpeg-dev zlib1g-dev apache2"
+LIST_OF_PYTHON_APPS="Mako cherrypy xlwt shapely pillow"
 
 #install apps
 apt-get update  # To get the latest package lists

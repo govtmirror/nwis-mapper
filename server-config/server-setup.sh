@@ -15,9 +15,12 @@ a2enmod proxy_http
 
 #get website content from github
 git clone https://github.com/USGS-OWI/nwis-mapper.git
-mv nwis-mapper mapper
-ln -s ${USER_HOME}/mapper /var/www 
 
+#rename folder to mapper
+mv nwis-mapper mapper
+
+#create symbolic link
+ln -s ${USER_HOME}/mapper /var/www 
 
 #start up cherrypy services
 sh ${USER_HOME}/mapper/server-config/PythonAppServers.sh
@@ -27,10 +30,11 @@ crontab -l | { cat; echo "*/5 * * * * ${USER_HOME}/mapper/server-config/chkCherr
 crontab -l | { cat; echo "0 0 * * 0 rm -rf ${USER_HOME}/mapper/exporter/temp/*"; } | crontab -
 
 #add redirect for /
+cp ${USER_HOME}/mapper/server-config/favicon.ico /var/www/favicon.ico
 cp ${USER_HOME}/mapper/server-config/index.html /var/www/index.html
 
 #remove default html folder
-rm -R html
+rm -R /var/www/html
 
 #add new virtual site
 cp ${USER_HOME}/mapper/server-config/nwis-mapper.conf /etc/apache2/sites-available/nwis-mapper.conf

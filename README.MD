@@ -9,5 +9,5 @@
 ```bash
 cd
 wget https://raw.githubusercontent.com/USGS-OWI/nwis-mapper/master/server-config/server-setup.sh
-sudo server-setup.sh
+sudo sh server-setup.sh
 ```

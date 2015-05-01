@@ -2630,7 +2630,6 @@ function showAquifer(xml, ioargs){
 
 	
 	var aquifer = aquifers[0].getElementsByTagName("feature");
-	console.log(aquifer);
 	var aqName = aquifer[0].getAttribute("name");
 	//var aqRed = aquifer[0].getAttribute("red");
 	//var aqGreen = aquifer[0].getAttribute("green");

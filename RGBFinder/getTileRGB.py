@@ -9,7 +9,7 @@ import shutil
 import datetime
 import string
 import math
-import Image
+from PIL import Image
 import sqlite3
 from types import *
 

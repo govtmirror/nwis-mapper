@@ -3,7 +3,7 @@
 #args
 USER_HOME=$(getent passwd $SUDO_USER | cut -d: -f6)
 USER=$SUDO_USER
-LIST_OF_MAIN_APPS="python python-pip git libgeos-dev libjpeg-dev zlib1g-dev apache2"
+LIST_OF_MAIN_APPS="python python-dev python-pip git libgeos-dev libjpeg-dev zlib1g-dev apache2"
 LIST_OF_PYTHON_APPS="Mako cherrypy xlwt shapely pillow"
 
 #install apps

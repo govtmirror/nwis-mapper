@@ -2600,7 +2600,7 @@ function getAquifer(mapPoint) {
 
 	// build web service URL
 	//http://localhost/mapper/tileRGB/?tileURL=nwis-mapper.s3.amazonaws.com/pr_aq&ptInfo=11,-13264777.4,4996198.3&cacheInfo=aquifers,TMS,png
-	aqURL = "./tileRGB/?tileURL=nwis-mapper.s3.amazonaws.com/pr_aq&ptInfo=" +
+	aqURL = "../tileRGB/?tileURL=nwis-mapper.s3.amazonaws.com/pr_aq&ptInfo=" +
 	map.getLevel() + "," + aqMapX + "," + aqMapY + "&cacheInfo=aquifers,TMS,png"
 
 	// set the xhrGet properties
@@ -2666,7 +2666,6 @@ function noAquifer(xml, ioargs){
 	return;
 }
 /* export */
-
 
 function setExport(tabCode) {
 

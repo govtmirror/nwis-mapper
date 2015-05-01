@@ -10,6 +10,7 @@ get and run setup script
 ```bash
 cd
 wget https://raw.githubusercontent.com/USGS-OWI/nwis-mapper/master/server-config/server-setup.sh
+OR "wget http://bit.ly/1HYyr0d" AND "mv 1HYyr0d server-setup.sh"
 sudo sh server-setup.sh
 ```
 

@@ -10,9 +10,6 @@ apt-get update  # To get the latest package lists
 apt-get install -y $LIST_OF_MAIN_APPS
 pip install $LIST_OF_PYTHON_APPS
 
-#install mod-proxy
-a2enmod proxy_http
-
 #get website content from github
 git clone https://github.com/USGS-OWI/nwis-mapper.git
 
@@ -26,8 +23,8 @@ ln -s ${USER_HOME}/mapper /var/www
 sh ${USER_HOME}/mapper/server-config/PythonAppServers.sh
 
 #setup up crons
-crontab -l | { cat; echo "*/5 * * * * ${USER_HOME}/mapper/server-config/chkCherry.sh"; } | crontab -
-crontab -l | { cat; echo "0 0 * * 0 rm -rf ${USER_HOME}/mapper/exporter/temp/*"; } | crontab -
+(crontab -u $SUDO_USER -l; echo "*/5 * * * * ${USER_HOME}/mapper/server-config/chkCherry.sh" ) | crontab -u $SUDO_USER -
+(crontab -u $SUDO_USER -l; echo "0 0 * * 0 rm -rf ${USER_HOME}/mapper/exporter/temp/*" ) | crontab -u $SUDO_USER -
 
 #add redirect for /
 cp ${USER_HOME}/mapper/server-config/favicon.ico /var/www/favicon.ico
@@ -36,11 +33,11 @@ cp ${USER_HOME}/mapper/server-config/index.html /var/www/index.html
 #remove default html folder
 rm -R /var/www/html
 
+#install mod-proxy
+a2enmod proxy_http
+
 #add new virtual site
 cp ${USER_HOME}/mapper/server-config/nwis-mapper.conf /etc/apache2/sites-available/nwis-mapper.conf
 a2dissite 000-default
 a2ensite nwis-mapper
 service apache2 restart
-
-#end
-fi

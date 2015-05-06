@@ -2756,8 +2756,8 @@ function showCoordinates(evt) {
 }
 
 function extentHistoryChangeHandler() {
-	dijit.byId("zoomprev").disabled = navToolbar.isFirstExtent();
-	dijit.byId("zoomnext").disabled = navToolbar.isLastExtent();
+	dijit.byId("zoomprev").disabled = navToolBar.isFirstExtent();
+	dijit.byId("zoomnext").disabled = navToolBar.isLastExtent();
 }
 
 function centerAndZoomOut() {
@@ -2780,7 +2780,7 @@ function zoomInTool() {
 	} else {
 		map.setMapCursor("url(images/nav_zoomin.png),auto");
 	}
-	navToolbar.activate(esri.toolbars.Navigation.ZOOM_IN);
+	navToolBar.activate(esri.toolbars.Navigation.ZOOM_IN);
 }
 
 function zoomOutTool() {
@@ -2790,7 +2790,7 @@ function zoomOutTool() {
 		map.setMapCursor("url(images/nav_zoomout.png),auto");
 	}
 
-	navToolbar.activate(esri.toolbars.Navigation.ZOOM_OUT);
+	navToolBar.activate(esri.toolbars.Navigation.ZOOM_OUT);
 }
 
 function setSliderZoom(zoomLevel) {

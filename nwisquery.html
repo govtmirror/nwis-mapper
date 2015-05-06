@@ -8,13 +8,13 @@
 		<meta name="publisher" content="USGS - U.S. Geological Survey, Water Resources">
 		<meta name="expires" content="never">
 		<title>Water Resources of the United States&mdash;National Water Information System (NWIS) Mapper</title>
-		<link rel="stylesheet" href="http://js.arcgis.com/3.8/js/dojo/dijit/themes/claro/claro.css">
-		<link rel="stylesheet" href="http://js.arcgis.com/3.8/js/esri/dijit/css/Popup.css">
-		<link rel="stylesheet" href="http://js.arcgis.com/3.8/js/dojo/dojox/layout/resources/ExpandoPane.css">
-		<link rel="stylesheet" href="http://js.arcgis.com/3.8/js/dojo/dojox/grid/resources/claroGrid.css">
-		<link rel="stylesheet" href="http://js.arcgis.com/3.8/js/dojo/dijit/themes/claro/document.css">
+		<link rel="stylesheet" href="http://js.arcgis.com/3.13/dijit/themes/claro/claro.css">
+		<link rel="stylesheet" href="http://js.arcgis.com/3.13/esri/dijit/css/Popup.css">
+		<link rel="stylesheet" href="http://js.arcgis.com/3.13/dojox/layout/resources/ExpandoPane.css">
+		<link rel="stylesheet" href="http://js.arcgis.com/3.13/dojox/grid/resources/claroGrid.css">
+		<link rel="stylesheet" href="http://js.arcgis.com/3.13/dijit/themes/claro/document.css">
 		<!-- EJSAPIv3.x -->
-		<link rel="stylesheet" href="http://js.arcgis.com/3.8/js/esri/css/esri.css">
+		<link rel="stylesheet" href="http://js.arcgis.com/3.13/esri/css/esri.css">
 		<link href="./style/msie.css" rel="stylesheet" type="text/css">
 		<link href="./style/common.css" rel="stylesheet" type="text/css">
 		<link href="./style/custom.css" rel="stylesheet" type="text/css">
@@ -156,7 +156,7 @@
 		</script>
 
 		<!-- load the ESRI toolkit -->
-		<script src="http://js.arcgis.com/3.8/"></script>
+		<script src="http://js.arcgis.com/3.13/"></script>
 		
 		<script type="text/javascript">
 			dojo.addOnLoad( function() {
@@ -470,10 +470,10 @@
 						<div id="navToolbar" data-dojo-type="dijit.Toolbar">
 							<div title="Click Map and Drag Box to Zoom In" data-dojo-type="dijit.form.Button" id="zoomin" data-dojo-props="iconClass:'zoominIcon', onClick:function(){zoomInTool();}"></div>
 							<div title="Click Map and Drag Box to Zoom Out" data-dojo-type="dijit.form.Button" id="zoomout" data-dojo-props="iconClass:'zoomoutIcon', onClick:function(){zoomOutTool();}"></div>
-							<div title="Map and Drag to Pan" data-dojo-type="dijit.form.Button" id="pan" data-dojo-props="iconClass:'panIcon', onClick:function(){navToolbar.activate(esri.toolbars.Navigation.PAN);}"></div>
-							<div title="Click Button to Zoom to Previous Map Extent" data-dojo-type="dijit.form.Button" id="zoomprev" data-dojo-props="iconClass:'zoomprevIcon', onClick:function(){navToolbar.zoomToPrevExtent();}"></div>
+							<div title="Map and Drag to Pan" data-dojo-type="dijit.form.Button" id="pan" data-dojo-props="iconClass:'panIcon', onClick:function(){navToolBar.activate(esri.toolbars.Navigation.PAN);}"></div>
+							<div title="Click Button to Zoom to Previous Map Extent" data-dojo-type="dijit.form.Button" id="zoomprev" data-dojo-props="iconClass:'zoomprevIcon', onClick:function(){navToolBar.zoomToPrevExtent();}"></div>
 							<div title="Click Button to Zoom to Initial Map Extent" data-dojo-type="dijit.form.Button" id="zoomfullext" data-dojo-props="iconClass:'zoomfullextIcon', onClick:function(){zoomToFirstExtent();}"></div>
-							<div title="Click Button to Zoom to Next Map Extent" data-dojo-type="dijit.form.Button" id="zoomnext" data-dojo-props="iconClass:'zoomnextIcon', onClick:function(){navToolbar.zoomToNextExtent();}"></div>
+							<div title="Click Button to Zoom to Next Map Extent" data-dojo-type="dijit.form.Button" id="zoomnext" data-dojo-props="iconClass:'zoomnextIcon', onClick:function(){navToolBar.zoomToNextExtent();}"></div>
 							<div title="Refresh Map" data-dojo-type="dijit.form.Button" id="refresh"     data-dojo-props="iconClass:'refreshIcon',     onClick:function(){ZoomManager(0);}"></div>
 						</div>	
 						
@@ -500,18 +500,6 @@
 					</div>
 				</div>
 			</div>
-		<!--
-			<div id="rightPane" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'right'">
-				<div data-dojo-type="dijit.form.Button" id="help"        data-dojo-props="label:'Help', onClick:function(){window.open('instructions_sm.html','Instructions');}"></div><br /><br /><br />
-				<div data-dojo-type="dijit.form.Button" id="zoomin"      data-dojo-props="iconClass:'zoominIcon', onClick:function(){zoomInTool();}"></div>
-				<div data-dojo-type="dijit.form.Button" id="pan"         data-dojo-props="iconClass:'panIcon',     onClick:function(){map.setMapCursor('default'); navToolBar.deactivate();}"></div>
-				<div data-dojo-type="dijit.form.Button" id="zoomout"     data-dojo-props="iconClass:'zoomoutIcon', onClick:function(){zoomOutTool();}"></div><br /><br />
-				<div data-dojo-type="dijit.form.Button" id="zoomprev"    data-dojo-props="iconClass:'zoomprevIcon', onClick:function(){navToolBar.zoomToPrevExtent();}"></div>
-				<div data-dojo-type="dijit.form.Button" id="zoomfullext" data-dojo-props="iconClass:'zoomfullextIcon', onClick:function(){zoomToFirstExtent();}"></div>
-				<div data-dojo-type="dijit.form.Button" id="zoomnext"    data-dojo-props="iconClass:'zoomnextIcon', onClick:function(){navToolBar.zoomToNextExtent();}"></div><br /><br />
-				<div data-dojo-type="dijit.form.Button" id="info"        data-dojo-props="style:'position:absolute;bottom:5px', label:'Page<br>Info', onClick:function(){dijit.byId('footerExtDialog').show();}"></div>
-			</div>
-		-->
 		</div>
 		
 	</body>

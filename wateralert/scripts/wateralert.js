@@ -33,6 +33,7 @@ function getLocation() {
 		
 		//if an error, call regular zoom manager to draw tiled sites
 		ZoomManager(0);
+		return;
 	  }
 	);
 }

@@ -17,6 +17,10 @@ git clone https://github.com/USGS-OWI/nwis-mapper.git
 #rename folder to mapper
 mv nwis-mapper mapper
 
+#set permissions
+chown www-data -R ${USER_HOME}/mapper 
+chgrp www-data -R ${USER_HOME}/mapper 
+
 #create symbolic link
 ln -s ${USER_HOME}/mapper /var/www 
 

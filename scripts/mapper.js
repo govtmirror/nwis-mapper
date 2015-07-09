@@ -3966,9 +3966,8 @@ function getAquifer(mapPoint) {
 	aqMapY = mapPoint.y.toFixed(1);
 
 	// build web service URL
-	//http://localhost/mapper/tileRGB/?tileURL=nwis-mapper.s3.amazonaws.com/pr_aq&ptInfo=11,-13264777.4,4996198.3&cacheInfo=aquifers,TMS,png
-	aqURL = "./tileRGB/?tileURL=nwis-mapper.s3.amazonaws.com/pr_aq&ptInfo=" +
-	map.getLevel() + "," + aqMapX + "," + aqMapY + "&cacheInfo=aquifers,TMS,png"
+	aqURL = "./aquifers/?ptInfo=" +
+	map.getLevel() + "," + aqMapX + "," + aqMapY
 
 	// set the xhrGet properties
 	var urlObj = esri.urlToObject(aqURL);
@@ -3995,14 +3994,15 @@ function showAquifer(xml, ioargs){
 	var aquifers = xml.getElementsByTagName("aquifers");
 	if (aquifers.length == 0) {return;}
 
-	
-	var aquifer = aquifers[0].getElementsByTagName("feature");
+	//
+	var aquifer = aquifers[0].getElementsByTagName("aquifer");
 	var aqName = aquifer[0].getAttribute("name");
-	//var aqRed = aquifer[0].getAttribute("red");
-	//var aqGreen = aquifer[0].getAttribute("green");
-	//var aqBlue =  aquifer[0].getAttribute("blue");
+	var aqRed = aquifer[0].getAttribute("red");
+	var aqGreen = aquifer[0].getAttribute("green");
+	var aqBlue =  aquifer[0].getAttribute("blue");
 	
-	//var aqDivStyle = '<span style="display:inline-block; width:20px; height:20px; background-color:rgb(' + aqRed + ',' + aqGreen + ',' + aqBlue + ');"></span>';
+	var aqDivStyle = '<span style="display:inline-block; width:20px; height:20px; background-color:rgb(' +
+		aqRed + ',' + aqGreen + ',' + aqBlue + ');"></span>';
 
 	var aqHTML = '<table border="0" width="290">' +
 					'<thead>' +
@@ -4190,41 +4190,10 @@ function makeExportFile() {
 //create basemap gallery
 function createBasemapGallery() {
 
-	var basemaps= [];
-	
-	//add national map basemap
-	var NationaMapBasemap = new esri.dijit.BasemapLayer({
-	  url:"http://basemap.nationalmap.gov/ArcGIS/rest/services/USGSTopo/MapServer"
-	});
-	var NationaMapServices = new esri.dijit.BasemapLayer({
-	  url:"http://services.nationalmap.gov/ArcGIS/rest/services/USGSTopoLarge/MapServer"
-	});
-
-	var NatMapBasemap = new esri.dijit.Basemap({
-	  layers:[NationaMapBasemap,NationaMapServices],
-	  thumbnailUrl:"images/natmapThumb.png",
-	  title:"USGS: The National Map"
-	});
-	basemaps.push(NatMapBasemap);
-	
-	//add USA topo maps
-	var USATopoBasemapLayer = new esri.dijit.BasemapLayer({
-	  url:"http://server.arcgisonline.com/ArcGIS/rest/services/USA_Topo_Maps/MapServer",
-	  opacity:0.7
-	});
-	
-	var USATopoBasemap = new esri.dijit.Basemap({
-	  layers:[USATopoBasemapLayer],
-	  thumbnailUrl:"images/USA_TopoThumb.png",
-	  title:"USA Topo Maps"
-	});
-	basemaps.push(USATopoBasemap);
-
 	// create a basemap Gallery
 	var basemapGallery = new esri.dijit.BasemapGallery({
 		showArcGISBasemaps:true,
 		bingMapsKey:"Aji8Re-EmYI1VdpMOe3roa64pwmu5phdNqclyk7QfJJ6RwZTZJqiCM8Mx13aIC8_",
-		basemaps:basemaps,
 		map:map
 	}, "basemapGallery");
 	basemapGallery.startup();
@@ -4293,3 +4262,4 @@ String.prototype.shorten = function(maxLength) {
   }
   return result;
 }
+

@@ -779,6 +779,7 @@ function zoomToFirstExtent() {
 function createBasemapGallery() {
 
 	var basemaps= [];
+	
 	//add hydro basemap
 	var HydroBasemapLayer = new esri.dijit.BasemapLayer({
 	  url:"http://hydro_bm.esri.com/ArcGIS/rest/services/Hydro/HydroReferenceOverlay_MXD/MapServer"
@@ -786,34 +787,14 @@ function createBasemapGallery() {
 	var TerrainBasemapLayer = new esri.dijit.BasemapLayer({
 	  url:"http://services.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer"
 	});
+	
 	var waterBasemap = new esri.dijit.Basemap({
-	  layers:[HydroBasemapLayer,TerrainBasemapLayer],
+	  layers:[TerrainBasemapLayer, HydroBasemapLayer],
 	  thumbnailUrl:"images/hydroThumb.png",
 	  title:"ESRI: Hydrography Basemap"
 	});
 	basemaps.push(waterBasemap);
 	
-	//add national map basemap
-	var NationaMapVectorFillsSmall = new esri.dijit.BasemapLayer({
-	  url:"http://basemap.nationalmap.gov/ArcGIS/rest/services/TNM_Vector_Fills_Small/MapServer"
-	});
-	var NationaMapVectorFillsLarge = new esri.dijit.BasemapLayer({
-	  url:"http://services.nationalmap.gov/ArcGIS/rest/services/TNM_Vector_Fills_Large/MapServer"
-	});
-	var NationalMapVectorLarge = new esri.dijit.BasemapLayer({
-	  url:"http://services.nationalmap.gov/ArcGIS/rest/services/TNM_Vector_Large/MapServer"
-	});
-	var NationalMapVectorSmall = new esri.dijit.BasemapLayer({
-	  url:"http://basemap.nationalmap.gov/ArcGIS/rest/services/TNM_Vector_Small/MapServer"
-	});
-
-	var NatMapBasemap = new esri.dijit.Basemap({
-	  layers:[NationalMapVectorSmall,NationalMapVectorLarge,NationaMapVectorFillsSmall,NationaMapVectorFillsLarge],
-	  thumbnailUrl:"images/natmapThumb.png",
-	  title:"USGS: The National Map"
-	});
-	basemaps.push(NatMapBasemap);	
-
 	// create a basemap Gallery
 	var basemapGallery = new esri.dijit.BasemapGallery({
 		showArcGISBasemaps:true,

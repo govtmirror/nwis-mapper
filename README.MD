@@ -7,15 +7,15 @@
 #### 1.  Deploy instance on AWS
 
 ##### current system specs
-m3.large
-8GB attached volume
-ubuntu server 12.04 LTS AMI
+
+ - m3.large 
+ - 8GB attached volume 
+ - ubuntu server 12.04 LTS AMI
 
 #### 2.  Set up server
 
 copy server setup script from github
 ```bash
-cd
 wget https://raw.githubusercontent.com/USGS-OWI/nwis-mapper/master/server-config/server-setup.sh
 ```
 

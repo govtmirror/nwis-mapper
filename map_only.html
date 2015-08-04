@@ -2,14 +2,14 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
-		<meta http-equiv="X-UA-Compatible" content="IE=7,IE=9">
+		<meta http-equiv="X-UA-Compatible" content="IE=8, IE=9">
 		<!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
 		<meta name="publisher" content="USGS - U.S. Geological Survey, Water Resources">
 		<meta name="expires" content="never">
 		<title>Water Resources of the United States&mdash;National Water Information System (NWIS) Mapper</title>
-		<link rel="stylesheet" href="http://js.arcgis.com/3.13/js/dojo/dijit/themes/claro/claro.css">  
-		<link rel="stylesheet" href="http://js.arcgis.com/3.13/js/esri/css/esri.css">
+		<link rel="stylesheet" href="http://js.arcgis.com/3.13/dijit/themes/claro/claro.css">
+		<link rel="stylesheet" href="http://js.arcgis.com/3.13/esri/css/esri.css">
 
 		<style type="text/css">
 			html, body {height:100%;width:100%;margin:0;padding:0;}
@@ -145,33 +145,20 @@
 
 				var basemaps= [];
 
-				//add national map basemap
-				var NationaMapBasemap = new esri.dijit.BasemapLayer({
-				  url:"http://basemap.nationalmap.gov/ArcGIS/rest/services/USGSTopo/MapServer"
+				//add hydro basemap
+				var HydroBasemapLayer = new esri.dijit.BasemapLayer({
+				  url:"http://hydrology.esri.com/arcgis/rest/services/WorldHydroReferenceOverlay/MapServer"
 				});
-				var NationaMapServices = new esri.dijit.BasemapLayer({
-				  url:"http://services.nationalmap.gov/ArcGIS/rest/services/USGSTopoLarge/MapServer"
-				});
-
-				var NatMapBasemap = new esri.dijit.Basemap({
-				  layers:[NationaMapBasemap,NationaMapServices],
-				  thumbnailUrl:"images/natmapThumb.png",
-				  title:"USGS: The National Map"
-				});
-				basemaps.push(NatMapBasemap);
-				
-				//add USA topo maps
-				var USATopoBasemapLayer = new esri.dijit.BasemapLayer({
-				  url:"http://server.arcgisonline.com/ArcGIS/rest/services/USA_Topo_Maps/MapServer",
-				  opacity:0.7
+				var TerrainBasemapLayer = new esri.dijit.BasemapLayer({
+				  url:"http://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer"
 				});
 				
-				var USATopoBasemap = new esri.dijit.Basemap({
-				  layers:[USATopoBasemapLayer],
-				  thumbnailUrl:"images/USA_TopoThumb.png",
-				  title:"USA Topo Maps"
+				var hydroBasemap = new esri.dijit.Basemap({
+				  layers:[TerrainBasemapLayer, HydroBasemapLayer],
+				  thumbnailUrl:"images/hydroThumb.png",
+				  title:"World Hydro Basemap"
 				});
-				basemaps.push(USATopoBasemap);
+				basemaps.push(hydroBasemap);
 
 				// create a basemap Gallery
 				var basemapGallery = new esri.dijit.BasemapGallery({
@@ -179,16 +166,7 @@
 					basemaps:basemaps,
 					map:map
 				}, "basemapGallery");
-				
 				basemapGallery.startup();
-				
-				dojo.connect(basemapGallery,'onSelectionChange', function(){
-				  //close the title pane 
-				  var bp = dijit.byId('basemapPane');
-				  bp.toggle();
-				});
-				dojo.connect(basemapGallery, "onError", function(msg) {console.log(msg)});
-
 			}
 
 			function zoomSite() {

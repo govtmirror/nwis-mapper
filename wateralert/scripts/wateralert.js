@@ -2823,49 +2823,28 @@ function createBasemapGallery() {
 
 	var basemaps= [];
 
-	//add national map basemap
-	var NationaMapVectorFillsSmall = new esri.dijit.BasemapLayer({
-	  url:"http://basemap.nationalmap.gov/ArcGIS/rest/services/TNM_Vector_Fills_Small/MapServer"
+	//add hydro basemap
+	var HydroBasemapLayer = new esri.dijit.BasemapLayer({
+	  url:"http://hydrology.esri.com/arcgis/rest/services/WorldHydroReferenceOverlay/MapServer"
 	});
-	var NationaMapVectorFillsLarge = new esri.dijit.BasemapLayer({
-	  url:"http://services.nationalmap.gov/ArcGIS/rest/services/TNM_Vector_Fills_Large/MapServer"
-	});
-	var NationalMapVectorLarge = new esri.dijit.BasemapLayer({
-	  url:"http://services.nationalmap.gov/ArcGIS/rest/services/TNM_Vector_Large/MapServer"
-	});
-	var NationalMapVectorSmall = new esri.dijit.BasemapLayer({
-	  url:"http://basemap.nationalmap.gov/ArcGIS/rest/services/TNM_Vector_Small/MapServer"
-	});
-
-	var NatMapBasemap = new esri.dijit.Basemap({
-	  layers:[NationalMapVectorSmall,NationalMapVectorLarge,NationaMapVectorFillsSmall,NationaMapVectorFillsLarge],
-	  thumbnailUrl:"images/natmapThumb.png",
-	  title:"USGS: The National Map"
-	});
-	basemaps.push(NatMapBasemap);
-	
-	//add USA topo maps
-	var USATopoBasemapLayer = new esri.dijit.BasemapLayer({
-	  url:"http://server.arcgisonline.com/ArcGIS/rest/services/USA_Topo_Maps/MapServer",
-	  opacity:0.7
+	var TerrainBasemapLayer = new esri.dijit.BasemapLayer({
+	  url:"http://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer"
 	});
 	
-	var USATopoBasemap = new esri.dijit.Basemap({
-	  layers:[USATopoBasemapLayer],
-	  thumbnailUrl:"images/USA_TopoThumb.png",
-	  title:"USA Topo Maps"
+	var hydroBasemap = new esri.dijit.Basemap({
+	  layers:[TerrainBasemapLayer, HydroBasemapLayer],
+	  thumbnailUrl:"images/hydroThumb.png",
+	  title:"World Hydro Basemap"
 	});
-	basemaps.push(USATopoBasemap);
+	basemaps.push(hydroBasemap);
 
 	// create a basemap Gallery
 	var basemapGallery = new esri.dijit.BasemapGallery({
 		showArcGISBasemaps:true,
-		bingMapsKey:"Aji8Re-EmYI1VdpMOe3roa64pwmu5phdNqclyk7QfJJ6RwZTZJqiCM8Mx13aIC8_",
 		basemaps:basemaps,
 		map:map
 	}, "basemapGallery");
 	basemapGallery.startup();
-
 }
 
 // Section: strings

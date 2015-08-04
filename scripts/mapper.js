@@ -4190,14 +4190,30 @@ function makeExportFile() {
 //create basemap gallery
 function createBasemapGallery() {
 
+	var basemaps= [];
+
+	//add hydro basemap
+	var HydroBasemapLayer = new esri.dijit.BasemapLayer({
+	  url:"http://hydrology.esri.com/arcgis/rest/services/WorldHydroReferenceOverlay/MapServer"
+	});
+	var TerrainBasemapLayer = new esri.dijit.BasemapLayer({
+	  url:"http://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer"
+	});
+	
+	var hydroBasemap = new esri.dijit.Basemap({
+	  layers:[TerrainBasemapLayer, HydroBasemapLayer],
+	  thumbnailUrl:"images/hydroThumb.png",
+	  title:"World Hydro Basemap"
+	});
+	basemaps.push(hydroBasemap);
+
 	// create a basemap Gallery
 	var basemapGallery = new esri.dijit.BasemapGallery({
 		showArcGISBasemaps:true,
-		bingMapsKey:"Aji8Re-EmYI1VdpMOe3roa64pwmu5phdNqclyk7QfJJ6RwZTZJqiCM8Mx13aIC8_",
+		basemaps:basemaps,
 		map:map
 	}, "basemapGallery");
 	basemapGallery.startup();
-
 }
 
 // Section: strings

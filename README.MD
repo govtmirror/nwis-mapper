@@ -10,7 +10,7 @@
 
  - m3.large 
  - 8GB attached volume 
- - ubuntu server 12.04 LTS AMI
+ - ubuntu server 14.04 LTS
 
 #### 2.  Set up server
 

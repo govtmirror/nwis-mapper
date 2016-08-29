@@ -12,7 +12,7 @@ apt-get install -y $LIST_OF_MAIN_APPS
 pip install $LIST_OF_PYTHON_APPS
 
 #get website content from github
-git clone https://github.com/USGS-WiM/nwis-mapper.git
+git clone https://github.com/USGS-OWI/nwis-mapper.git
 
 #set proper permissions on nwis mapper folder
 chown ubuntu -R ${USER_HOME}/nwis-mapper

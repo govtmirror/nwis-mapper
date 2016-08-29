@@ -47,7 +47,7 @@ gulp.task('release', ['dist'], function () { return inc('major'); })
 
 gulp.task('push', function () {
     console.info('Pushing...');
-    return git.push('USGS-WiM', 'master', { args: " --tags" }, function (err) {
+    return git.push('USGS-OWI', 'master', { args: " --tags" }, function (err) {
         if (err) {
             console.error(err);
             throw err;

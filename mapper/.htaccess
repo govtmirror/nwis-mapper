@@ -1,0 +1,12 @@
+Options +FollowSymlinks
+RewriteEngine on
+RewriteRule ^nwis\/site\/(.*)$ http://waterservices.usgs.gov/nwis/site/$1 [P]
+RewriteRule ^sitesmapper\/(.*)$ http://waterdata.usgs.gov/$1 [P]
+RewriteRule ^nwissitesmapper\/(.*)$ http://nwis.waterdata.usgs.gov/$1 [P]
+RewriteRule ^wamapper\/(.*)$ http://waterservices.usgs.gov/nwis/iv/$1 [P]
+RewriteRule ^export\/(.*)$ http://localhost:8080/exportFile$1 [P]
+RewriteRule ^exportSM\/(.*)$ http://localhost:8081/exportFileSM$1 [P]
+RewriteRule ^sitecounter\/(.*)$ http://localhost:9998/counterProcess$1 [P]
+RewriteRule ^fileUpload\/(.*)$ http://localhost:9997/$1 [P]
+RewriteRule ^aquifers\/(.*)$ http://localhost:8082/aquiferName$1 [P]
+RewriteRule ^tileRGB\/(.*)$ http://localhost:8085/tileRGBValue$1 [P]

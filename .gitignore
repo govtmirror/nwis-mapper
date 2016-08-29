@@ -1,4 +1,2 @@
-# User-specific files
-bower_components
-node_modules
-typings
+
+tile-creation/data/NWISSites.gdb

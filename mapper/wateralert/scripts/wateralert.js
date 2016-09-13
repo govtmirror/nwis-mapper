@@ -583,7 +583,10 @@ function getIVdata(siteGroup) {
 							case "00062": parm_unit=" ft"; parm_nm = "Elevation above datum"; break;
 							case "00055": parm_unit=" ft/sec"; parm_nm = "Stream velocity"; break;
 							case "62614": parm_unit=" ft"; parm_nm = "Lake elevation above NVGD 1929"; break;
+							case "62615": parm_unit=" ft"; parm_nm = "Lake or reservoir water surface elevation above NAVD 1988"; break;
 							case "62616": parm_unit=" m"; parm_nm = "Lake elevation above NVGD 1929"; break;
+							case "62619": parm_unit=" m"; parm_nm = "Estuary or ocean water surface elevation above NGVD 1929"; break;
+							case "63158": parm_unit=" m"; parm_nm = "Stream water level elevation above NGVD 1929"; break;
 							case "63160": parm_unit=" ft"; parm_nm = "Water-surface elevation above NAVD 1988"; break;
 							case "72020": parm_unit=" ft"; parm_nm = "Elevation above NGVD 1929"; break;
 							case "72147": parm_unit=" ft"; parm_nm = "Depth of sensor below water surface"; break;

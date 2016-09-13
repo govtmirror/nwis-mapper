@@ -34,11 +34,11 @@ if __name__ == "__main__":
 		print "Working on: " + cacheName
 
 		print "Step 1 -- Deleting existing folder..."
-		subprocess.call(["aws", "s3", "rm", destinationBucket + "/" + cacheName, "--recursive", "--profile", "WIM"])
+		subprocess.call(["aws", "s3", "rm", destinationBucket + "/" + cacheName, "--recursive", "--profile", "CHS"])
 		print "Step 1 -- Done..."
 
 		print "Step 2 -- Copying cache to s3..."
-		subprocess.call(["aws", "s3", "cp", cachePath + "/" + cacheName + "/NWIS/_alllayers", destinationBucket + "/" + cacheName, "--recursive", "--profile", "WIM"])
+		subprocess.call(["aws", "s3", "cp", cachePath + "/" + cacheName + "/NWIS/_alllayers", destinationBucket + "/" + cacheName, "--recursive", "--profile", "CHS"])
 		print "Step 2 -- Done..."
 
 		#pause loop for testing

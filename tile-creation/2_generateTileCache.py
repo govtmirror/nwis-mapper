@@ -32,6 +32,8 @@ if __name__ == "__main__":
 	scriptPath = os.path.dirname(os.path.realpath(__file__))
 	dataPath = scriptPath + '/data'
 	cachePath = outPath + '/cache'
+	if not os.path.exists(cachePath):
+		os.makedirs(cachePath)
 
 	#variables
 	tilingScheme = scriptPath + '/PredefinedTilingScheme_levels_ALL.xml'

@@ -608,7 +608,7 @@ function getIVdata(siteGroup) {
 							
 						  }
 
-						waterAlertDataNew += "<b>" + parm_nm + ":</b> " + data.data[g].most_recent_value.split(" ")[0] + parm_unit + "<br/>&nbsp;&nbsp;on " + data.data[g].most_recent_value.split(" ")[2] + " at " + data.data[g].most_recent_value.split(" ")[4] + " " + data.data[g].most_recent_value.split(" ")[5] + "&nbsp;(DD " + data.data[g].dd_no + ")<br />";	
+						waterAlertDataNew += "<b>" + parm_nm + ":</b> " + data.data[g].most_recent_value.split(" ")[0] + parm_unit + "<br/>&nbsp;&nbsp;on " + data.data[g].most_recent_value.split(" ")[2] + " at " + data.data[g].most_recent_value.split(" ")[4] + " " + data.data[g].most_recent_value.split(" ")[5] + "&nbsp;(DD " + data.data[g].parameter_cd + ")<br />";	
 
 					}
 					

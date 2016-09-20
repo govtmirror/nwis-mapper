@@ -218,7 +218,7 @@
 								"service besclient restart \n",
 								
 								
-								"echo \"" , {"Fn::FindInMap": ["Environment", {"Ref": "Environment"},"owis3bucket"]} , "\" > /tmp/s3bucket.txt"
+								"echo \"" , {s3bucket:\"{"Fn::FindInMap": ["Environment", {"Ref": "Environment"},"owis3bucket"]}\" , "\" > /tmp/s3bucket.json"
 								
 							]
 						]

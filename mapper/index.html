@@ -459,8 +459,8 @@
 			// Tile and Graphics Overlays
 			// ============================================================
 
-			// add the additional thematic layers
-			function addS3layers() {
+			// add the s3 layers
+			function addS3layers(s3bucket) {
 				// hucs
 				var hucs = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/hucs/${level}/${row}/${col}.png", {"id": "hucs", opacity: 0.3, visible: false});  
 				map.addLayer(hucs);

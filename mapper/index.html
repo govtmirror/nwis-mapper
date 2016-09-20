@@ -218,7 +218,6 @@
 		var navToolBar;
 		var popup;
 		var ovMap;
-		var s3bucket;
 
 		//get url for footerdialog
 		var footerURL = window.location.href;
@@ -299,17 +298,17 @@
 		function init() {
 		
 			var layersRequest = esri.request({
-			  url: './server-config/s3bucket.txt',
+			  url: './s3bucket.json',
 			  content: { f: "json" },
 			  handleAs: "json",
 			  callbackParamName: "callback"
 			});
 			layersRequest.then(
 			  function(response) {
-				s3bucket = response;
+				addS3layers(response.s3bucket);
 				console.log("Success: ", response);
 			}, function(error) {
-				s3bucket = 'nwismapper'
+				addS3layers('nwismapper');
 				console.log("Error: ", error);
 			});
 
@@ -461,38 +460,39 @@
 			// ============================================================
 
 			// add the additional thematic layers
-			
-			// hucs
-			var hucs = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/hucs/${level}/${row}/${col}.png", {"id": "hucs", opacity: 0.3, visible: false});  
-			map.addLayer(hucs);
-			
-			// aquifers
-			var pr_aq = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/pr_aq/${level}/${row}/${col}.png", {"id": "pr_aq", visible: false}); 
-			map.addLayer(pr_aq);
-			
-			// define NWIS tile cache overlay layers
-			var sw_act = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/sw_act/${level}/${row}/${col}.png", {"id": "sw_act", visible: false});
-			var sw_ina = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/sw_ina/${level}/${row}/${col}.png", {"id": "sw_ina", visible: false}); 
-			var sp_act = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/sp_act/${level}/${row}/${col}.png", {"id": "sp_act", visible: false});
-			var sp_ina = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/sp_ina/${level}/${row}/${col}.png", {"id": "sp_ina", visible: false});
-			var at_act = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/at_act/${level}/${row}/${col}.png", {"id": "at_act", visible: false});
-			var at_ina = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/at_ina/${level}/${row}/${col}.png", {"id": "at_ina", visible: false});
-			var ot_act = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/ot_act/${level}/${row}/${col}.png", {"id": "ot_act", visible: false});
-			var ot_ina = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/ot_ina/${level}/${row}/${col}.png", {"id": "ot_ina", visible: false});		
-			var gw_act = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/gw_act/${level}/${row}/${col}.png", {"id": "gw_act", visible: false});
-			var gw_ina = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/gw_ina/${level}/${row}/${col}.png", {"id": "gw_ina", visible: false});
+			funcion addS3layers() {
+				// hucs
+				var hucs = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/hucs/${level}/${row}/${col}.png", {"id": "hucs", opacity: 0.3, visible: false});  
+				map.addLayer(hucs);
+				
+				// aquifers
+				var pr_aq = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/pr_aq/${level}/${row}/${col}.png", {"id": "pr_aq", visible: false}); 
+				map.addLayer(pr_aq);
+				
+				// define NWIS tile cache overlay layers
+				var sw_act = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/sw_act/${level}/${row}/${col}.png", {"id": "sw_act", visible: false});
+				var sw_ina = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/sw_ina/${level}/${row}/${col}.png", {"id": "sw_ina", visible: false}); 
+				var sp_act = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/sp_act/${level}/${row}/${col}.png", {"id": "sp_act", visible: false});
+				var sp_ina = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/sp_ina/${level}/${row}/${col}.png", {"id": "sp_ina", visible: false});
+				var at_act = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/at_act/${level}/${row}/${col}.png", {"id": "at_act", visible: false});
+				var at_ina = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/at_ina/${level}/${row}/${col}.png", {"id": "at_ina", visible: false});
+				var ot_act = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/ot_act/${level}/${row}/${col}.png", {"id": "ot_act", visible: false});
+				var ot_ina = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/ot_ina/${level}/${row}/${col}.png", {"id": "ot_ina", visible: false});		
+				var gw_act = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/gw_act/${level}/${row}/${col}.png", {"id": "gw_act", visible: false});
+				var gw_ina = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/gw_ina/${level}/${row}/${col}.png", {"id": "gw_ina", visible: false});
 
-			// add the overlays to the map, but invisible
-			map.addLayer(gw_ina);
-			map.addLayer(ot_ina);
-			map.addLayer(at_ina);
-			map.addLayer(sp_ina);
-			map.addLayer(sw_ina);
-			map.addLayer(gw_act);
-			map.addLayer(ot_act);
-			map.addLayer(at_act);
-			map.addLayer(sp_act);
-			map.addLayer(sw_act);
+				// add the overlays to the map, but invisible
+				map.addLayer(gw_ina);
+				map.addLayer(ot_ina);
+				map.addLayer(at_ina);
+				map.addLayer(sp_ina);
+				map.addLayer(sw_ina);
+				map.addLayer(gw_act);
+				map.addLayer(ot_act);
+				map.addLayer(at_act);
+				map.addLayer(sp_act);
+				map.addLayer(sw_act);
+			}
 
 			// define a selection layer overlay
 			defineGraphicLayer("sel_glayer", 1.0);

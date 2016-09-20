@@ -14,6 +14,9 @@ pip install $LIST_OF_PYTHON_APPS
 #get website content from github
 git clone https://github.com/USGS-OWI/nwis-mapper.git
 
+#copy bucket info file
+cp /tmp/s3bucket.txt ${USER_HOME}/nwis-mapper/mapper/s3bucket.txt
+
 #set proper permissions on nwis mapper folder
 chown ubuntu -R ${USER_HOME}/nwis-mapper
 chgrp ubuntu -R ${USER_HOME}/nwis-mapper

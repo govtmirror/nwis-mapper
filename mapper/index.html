@@ -460,7 +460,7 @@
 			// ============================================================
 
 			// add the additional thematic layers
-			funcion addS3layers() {
+			function addS3layers() {
 				// hucs
 				var hucs = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/hucs/${level}/${row}/${col}.png", {"id": "hucs", opacity: 0.3, visible: false});  
 				map.addLayer(hucs);

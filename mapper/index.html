@@ -183,6 +183,7 @@
 			dojo.require("dijit.Toolbar");
 
 			dojo.require("esri.map");
+			dojo.require("esri.request");
 			dojo.require("esri.tasks.locator");
 			dojo.require("esri.toolbars.navigation");
 			dojo.require("esri.virtualearth.VETiledLayer");
@@ -217,6 +218,7 @@
 		var navToolBar;
 		var popup;
 		var ovMap;
+		var s3bucket;
 
 		//get url for footerdialog
 		var footerURL = window.location.href;
@@ -295,6 +297,21 @@
 		var icon_postfix = "_30";
 
 		function init() {
+		
+			var layersRequest = esri.request({
+			  url: './server-config/s3bucket.txt',
+			  content: { f: "json" },
+			  handleAs: "json",
+			  callbackParamName: "callback"
+			});
+			layersRequest.then(
+			  function(response) {
+				s3bucket = response;
+				console.log("Success: ", response);
+			}, function(error) {
+				s3bucket = 'nwismapper'
+				console.log("Error: ", error);
+			});
 
 			// sliderbar
 			//esri.config.defaults.map.slider = {position:"absolute", left:"10px", top:"30px", height:"200px"};
@@ -430,13 +447,6 @@
 				else
 					return true;
 			});
-			
-			// ============================================================
-			// define and add basemap
-			// ============================================================
-			//var url = "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer";
-			//var tiledLayer = new esri.layers.ArcGISTiledMapServiceLayer(url);
-			//map.addLayer(tiledLayer);
 
 			// ============================================================
 			// get URL parameters
@@ -453,36 +463,24 @@
 			// add the additional thematic layers
 			
 			// hucs
-			var hucs = new esri.layers.WebTiledLayer("http://nwismapper.s3.amazonaws.com/hucs/${level}/${row}/${col}.png", {"id": "hucs", opacity: 0.3, visible: false});  
+			var hucs = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/hucs/${level}/${row}/${col}.png", {"id": "hucs", opacity: 0.3, visible: false});  
 			map.addLayer(hucs);
 			
-			/*
-			defineTileLayerS3("hucs", "hucs", 0.3);
-			map.addLayer(new hucs());
-			drawTLayer("chkHUC", "hucs");
-			*/
-			
 			// aquifers
-			var pr_aq = new esri.layers.WebTiledLayer("http://nwismapper.s3.amazonaws.com/pr_aq/${level}/${row}/${col}.png", {"id": "pr_aq", visible: false}); 
+			var pr_aq = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/pr_aq/${level}/${row}/${col}.png", {"id": "pr_aq", visible: false}); 
 			map.addLayer(pr_aq);
 			
-			/*
-            defineTileLayerS3("pr_aq", "pr_aq", 1.0);
-            map.addLayer(new pr_aq());
-            drawTLayer("chkAQ", pr_aq);
-			*/
-			
 			// define NWIS tile cache overlay layers
-			var sw_act = new esri.layers.WebTiledLayer("http://nwismapper.s3.amazonaws.com/sw_act/${level}/${row}/${col}.png", {"id": "sw_act", visible: false});
-			var sw_ina = new esri.layers.WebTiledLayer("http://nwismapper.s3.amazonaws.com/sw_ina/${level}/${row}/${col}.png", {"id": "sw_ina", visible: false}); 
-			var sp_act = new esri.layers.WebTiledLayer("http://nwismapper.s3.amazonaws.com/sp_act/${level}/${row}/${col}.png", {"id": "sp_act", visible: false});
-			var sp_ina = new esri.layers.WebTiledLayer("http://nwismapper.s3.amazonaws.com/sp_ina/${level}/${row}/${col}.png", {"id": "sp_ina", visible: false});
-			var at_act = new esri.layers.WebTiledLayer("http://nwismapper.s3.amazonaws.com/at_act/${level}/${row}/${col}.png", {"id": "at_act", visible: false});
-			var at_ina = new esri.layers.WebTiledLayer("http://nwismapper.s3.amazonaws.com/at_ina/${level}/${row}/${col}.png", {"id": "at_ina", visible: false});
-			var ot_act = new esri.layers.WebTiledLayer("http://nwismapper.s3.amazonaws.com/ot_act/${level}/${row}/${col}.png", {"id": "ot_act", visible: false});
-			var ot_ina = new esri.layers.WebTiledLayer("http://nwismapper.s3.amazonaws.com/ot_ina/${level}/${row}/${col}.png", {"id": "ot_ina", visible: false});		
-			var gw_act = new esri.layers.WebTiledLayer("http://nwismapper.s3.amazonaws.com/gw_act/${level}/${row}/${col}.png", {"id": "gw_act", visible: false});
-			var gw_ina = new esri.layers.WebTiledLayer("http://nwismapper.s3.amazonaws.com/gw_ina/${level}/${row}/${col}.png", {"id": "gw_ina", visible: false});
+			var sw_act = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/sw_act/${level}/${row}/${col}.png", {"id": "sw_act", visible: false});
+			var sw_ina = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/sw_ina/${level}/${row}/${col}.png", {"id": "sw_ina", visible: false}); 
+			var sp_act = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/sp_act/${level}/${row}/${col}.png", {"id": "sp_act", visible: false});
+			var sp_ina = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/sp_ina/${level}/${row}/${col}.png", {"id": "sp_ina", visible: false});
+			var at_act = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/at_act/${level}/${row}/${col}.png", {"id": "at_act", visible: false});
+			var at_ina = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/at_ina/${level}/${row}/${col}.png", {"id": "at_ina", visible: false});
+			var ot_act = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/ot_act/${level}/${row}/${col}.png", {"id": "ot_act", visible: false});
+			var ot_ina = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/ot_ina/${level}/${row}/${col}.png", {"id": "ot_ina", visible: false});		
+			var gw_act = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/gw_act/${level}/${row}/${col}.png", {"id": "gw_act", visible: false});
+			var gw_ina = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/gw_ina/${level}/${row}/${col}.png", {"id": "gw_ina", visible: false});
 
 			// add the overlays to the map, but invisible
 			map.addLayer(gw_ina);
@@ -495,32 +493,6 @@
 			map.addLayer(at_act);
 			map.addLayer(sp_act);
 			map.addLayer(sw_act);
-		/*
-			// define NWIS tile cache overlay layers, add layers, but add them as invisible initially
-			defineTileLayerS3("sw_act", "sw_act", 1.0);
-			defineTileLayerS3("sw_ina", "sw_ina", 1.0);
-			defineTileLayerS3("sp_act", "sp_act", 1.0);
-			defineTileLayerS3("sp_ina", "sp_ina", 1.0);
-			defineTileLayerS3("at_act", "at_act", 1.0);
-			defineTileLayerS3("at_ina", "at_ina", 1.0);
-			defineTileLayerS3("ot_act", "ot_act", 1.0);
-			defineTileLayerS3("ot_ina", "ot_ina", 1.0);
-			defineTileLayerS3("gw_act", "gw_act", 1.0);
-			defineTileLayerS3("gw_ina", "gw_ina", 1.0);
-
-			// add the overlays to the map, but invisible
-			map.addLayer(new gw_ina());
-			map.addLayer(new ot_ina());
-			map.addLayer(new at_ina());
-			map.addLayer(new sp_ina());
-			map.addLayer(new sw_ina());
-
-			map.addLayer(new gw_act());
-			map.addLayer(new ot_act());
-			map.addLayer(new at_act());
-			map.addLayer(new sp_act());
-			map.addLayer(new sw_act());
-		*/
 
 			// define a selection layer overlay
 			defineGraphicLayer("sel_glayer", 1.0);

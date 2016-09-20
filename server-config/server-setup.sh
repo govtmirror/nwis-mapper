@@ -9,7 +9,7 @@ LIST_OF_PYTHON_APPS="Mako cherrypy xlwt shapely pillow"
 #install apps
 apt-get update  # To get the latest package lists
 apt-get install -y $LIST_OF_MAIN_APPS
-pip install $LIST_OF_PYTHON_APPS
+pip install --index-url=http://pypi.python.org/simple/ --trusted-host pypi.python.org $LIST_OF_PYTHON_APPS
 
 #get website content from github
 git clone https://github.com/USGS-OWI/nwis-mapper.git

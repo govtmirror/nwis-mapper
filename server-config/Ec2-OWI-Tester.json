@@ -14,7 +14,7 @@
 		{
 			"Description": "Operating System Desired",
 			"Type": "String",
-			"Default": "AmazonLinuxRedHat",
+			"Default": "UbuntuDebian",
 			"AllowedValues": ["AmazonLinuxRedHat", "RedHatEnterpriseLinuxRedHat", "UbuntuDebian"]
 		}
 	},
@@ -56,28 +56,6 @@
 		},
 		"OS":
 		{
-			"AmazonLinuxRedHat":
-			{
-				"amiID"           : "ami-c229c0a2",
-				"InstanceType"    : "t2.micro",
-				"installer"		  : "yum install -y",
-				"packages"		  : "awscli",
-				"IEMDistro"       : "Red_Hat_Enterprise",
-				"IEMClientName"   : "BESAgent-9.2.5.130-rhe5.x86_64.rpm",
-				"FileInstaller"   : "rpm -i",
-				"CentrifyInstaller": "centrify-suite-2015.1-rhel4-x86_64.tgz"
-			},
-			"RedHatEnterpriseLinuxRedHat":
-			{
-				"amiID"           : "ami-775e4f16",
-				"InstanceType"    : "t2.micro",
-				"installer"		  : "yum install -y",
-				"packages"		  : "awscli",
-				"IEMDistro"       : "Red_Hat_Enterprise",
-				"IEMClientName"   : "BESAgent-9.2.5.130-rhe5.x86_64.rpm",
-				"FileInstaller"   : "rpm -i",
-				"CentrifyInstaller": "centrify-suite-2015.1-rhel4-x86_64.tgz"
-			},
 			"UbuntuDebian":
 			{
 				"amiID"           : "ami-9abea4fb",
@@ -217,7 +195,12 @@
 								"touch /var/opt/BESClient/USGS_CHS.txt \n",
 								"service besclient restart \n",
 								
-								"echo \"{'s3bucket':{'" , {"Fn::FindInMap": ["Environment", {"Ref": "Environment"},"owis3bucket"]} , "'}\" > /tmp/s3bucket.json"
+								"echo \"{'s3bucket':{'" , {"Fn::FindInMap": ["Environment", {"Ref": "Environment"},"owis3bucket"]} , "'}\" > /tmp/s3bucket.json \n"
+								
+								"wget https://raw.githubusercontent.com/USGS-OWI/nwis-mapper/master/server-config/server-setup.sh \n",
+								
+								"sh server-setup.sh \n",
+
 								
 							]
 						]

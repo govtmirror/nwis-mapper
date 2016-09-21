@@ -9,13 +9,15 @@ LIST_OF_PYTHON_APPS="Mako cherrypy xlwt shapely pillow"
 #install apps
 apt-get update  # To get the latest package lists
 apt-get install -y $LIST_OF_MAIN_APPS
+wget https://bootstrap.pypa.io/get-pip.py
+python get-pip.py
 pip install --index-url=http://pypi.python.org/simple/ --trusted-host pypi.python.org $LIST_OF_PYTHON_APPS
 
 #get website content from github
 git clone https://github.com/USGS-OWI/nwis-mapper.git
 
 #copy bucket info file
-cp /tmp/s3bucket.txt ${USER_HOME}/nwis-mapper/mapper/s3bucket.txt
+cp /tmp/s3bucket.json ${USER_HOME}/nwis-mapper/mapper/s3bucket.json
 
 #set proper permissions on nwis mapper folder
 chown ubuntu -R ${USER_HOME}/nwis-mapper

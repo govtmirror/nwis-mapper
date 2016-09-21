@@ -217,8 +217,7 @@
 								"touch /var/opt/BESClient/USGS_CHS.txt \n",
 								"service besclient restart \n",
 								
-								
-								"echo \"" , {s3bucket:\"{"Fn::FindInMap": ["Environment", {"Ref": "Environment"},"owis3bucket"]}\" , "\" > /tmp/s3bucket.json"
+								"echo \"{'s3bucket':{'" , {"Fn::FindInMap": ["Environment", {"Ref": "Environment"},"owis3bucket"]} , "'}\" > /tmp/s3bucket.json"
 								
 							]
 						]

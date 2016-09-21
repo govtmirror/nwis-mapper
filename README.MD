@@ -17,7 +17,6 @@ This site is set up for automated deployment via deployhq and will deploy at any
 copy server setup script from github
 ```bash
 wget https://raw.githubusercontent.com/USGS-OWI/nwis-mapper/master/server-config/server-setup.sh --no-check-certificate
-git config --global http.sslVerify false
 ```
 
 run server setup script

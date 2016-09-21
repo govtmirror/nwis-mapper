@@ -18,7 +18,7 @@ apt-get install -y $LIST_OF_MAIN_APPS
 pip install $LIST_OF_PYTHON_APPS
 
 #get repo from github
-GIT_SSL_NO_VERIFY=true git clone https://github.com/USGS-OWI/nwis-mapper.git
+GIT_SSL_NO_VERIFY=true git clone https://github.com/USGS-OWI/nwis-mapper.git ${APP_PATH}/nwis-mapper
 
 #copy bucket info file (should have been placed by cloud formation)
 if [ -f /tmp/s3bucket.json ]; then

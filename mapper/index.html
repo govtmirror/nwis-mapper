@@ -179,8 +179,7 @@
 				addS3layers(response.s3bucket);
 				console.log("Success: ", response);
 			}, function(error) {
-				addS3layers('nwismapper');
-				console.log("Error: ", error);
+				console.log("There was a problem requesting the bucket name: ", error);
 			});
 
 			// set default map extent

@@ -157,7 +157,7 @@ body {
 	color: #416AB1;
 }
 .claro .dijitAccordianTitle {
-	background-image: url(images/HelpSystem16.png);
+	background-image: url(./images/HelpSystem16.png);
 	width: 16px;
 	height: 16px;
 	position: absolute;
@@ -182,164 +182,164 @@ body {
 	font-size: smaller!important;
 }
 .legendIcon {
-	background-image: url(images/nav_zoomin.png);
+	background-image: url(./images/nav_zoomin.png);
 	width: 16px;
 	height: 16px;
 	position: absolute;
 	left: 80%;
 }
 .zoominIcon {
-	background-image: url(images/nav_zoomin_box.png);
+	background-image: url(./images/nav_zoomin_box.png);
 	width: 16px;
 	height: 16px;
 }
 .zoomoutIcon {
-	background-image: url(images/nav_zoomout_box.png);
+	background-image: url(./images/nav_zoomout_box.png);
 	width: 16px;
 	height: 16px;
 }
 .zoomfullextIcon {
-	background-image: url(images/nav_fullextent.png);
+	background-image: url(./images/nav_fullextent.png);
 	width: 16px;
 	height: 16px;
 }
 .zoomprevIcon {
-	background-image: url(images/nav_previous.png);
+	background-image: url(./images/nav_previous.png);
 	width: 16px;
 	height: 16px;
 }
 .zoomnextIcon {
-	background-image: url(images/nav_next.png);
+	background-image: url(./images/nav_next.png);
 	width: 16px;
 	height: 16px;
 }
 .panIcon {
-	background-image: url(images/nav_pan.png);
+	background-image: url(./images/nav_pan.png);
 	width: 16px;
 	height: 16px;
 }
 .refreshIcon {
-	background-image: url(images/GenericRefresh_B_16.png);
+	background-image: url(./images/GenericRefresh_B_16.png);
 	width: 16px;
 	height: 16px;
 }
 .deactivateIcon {
-	background-image: url(images/nav_decline.png);
+	background-image: url(./images/nav_decline.png);
 	width: 16px;
 	height: 16px;
 }
 .basemap_icon {
-	background-image: url(images/Map16.png);
+	background-image: url(./images/Map16.png);
 	width: 16px;
 	height: 16px;
 	position: absolute;
 	left: 5px;
 }
 .maplayers_icon {
-	background-image: url(images/Basemap16.png);
+	background-image: url(./images/Basemap16.png);
 	width: 16px;
 	height: 16px;
 	position: absolute;
 	left: 5px;
 }
 .status_icon {
-	background-image: url(images/IdentifyWindowShow16.png);
+	background-image: url(./images/IdentifyWindowShow16.png);
 	width: 16px;
 	height: 16px;
 	position: absolute;
 	left: 2px;
 }
 .maptools_icon {
-	background-image: url(images/nav_zoomin.png);
+	background-image: url(./images/nav_zoomin.png);
 	width: 16px;
 	height: 16px;
 	position: absolute;
 	left: 5px;
 }
 .resources_icon {
-	background-image: url(images/HyperlinkTool16.png);
+	background-image: url(./images/HyperlinkTool16.png);
 	width: 16px;
 	height: 16px;
 	position: absolute;
 	left: 2px;
 }
 .search_icon {
-	background-image: url(images/GenericGreenRightArrow16.png);
+	background-image: url(./images/GenericGreenRightArrow16.png);
 	width: 16px;
 	height: 16px;
 }
 .datatools_icon {
-	background-image: url(images/TableQuery16.png);
+	background-image: url(./images/TableQuery16.png);
 	width: 16px;
 	height: 16px;
 	position: absolute;
 	left: 5px;
 }
 .ovmap_icon {
-	background-image: url(images/ScreenPositionBottomRight16.png);
+	background-image: url(./images/ScreenPositionBottomRight16.png);
 	width: 16px;
 	height: 16px;
 	position: absolute;
 	left: 5px;
 }
 .sw_acc_icon {
-	background-image: url(images/panes/sw_pane.png);
+	background-image: url(./images/panes/sw_pane.png);
 	width: 16px;
 	height: 16px;
 	position: absolute;
 	left: 5px;
 }
 .gw_acc_icon {
-	background-image: url(images/panes/gw_pane.png);
+	background-image: url(./images/panes/gw_pane.png);
 	width: 16px;
 	height: 16px;
 	position: absolute;
 	left: 5px;
 }
 .sp_acc_icon {
-	background-image: url(images/panes/sp_pane.png);
+	background-image: url(./images/panes/sp_pane.png);
 	width: 19px;
 	height: 16px;
 	position: absolute;
 	left: 5px;
 }
 .at_acc_icon {
-	background-image: url(images/panes/at_pane.png);
+	background-image: url(./images/panes/at_pane.png);
 	width: 16px;
 	height: 16px;
 	position: absolute;
 	left: 5px;
 }
 .ot_acc_icon {
-	background-image: url(images/panes/ot_pane.png);
+	background-image: url(./images/panes/ot_pane.png);
 	width: 16px;
 	height: 16px;
 	position: absolute;
 	left: 5px;
 }
 .about_icon {
-	background-image: url(images/HelpSystem_B_16.png);
+	background-image: url(./images/HelpSystem_B_16.png);
 	width: 16px;
 	height: 16px;
 	position: absolute;
 	left: 5px;
 }
 .warning_icon {
-	background-image: url(images/GenericWarning16.png);
+	background-image: url(./images/GenericWarning16.png);
 	width: 16px;
 	height: 16px;
 	position: absolute;
 	left: 5px;
 }
 .checkbox_icon {
-	background-image: url(images/checkbox_yes.png);
+	background-image: url(./images/checkbox_yes.png);
 	width: 16px;
 	height: 16px;
 	position: absolute;
 	left: 5px;
 }
 .siteInfoIcon {
-	background-image: url(images/GenericGreenRightArrow16.png);
+	background-image: url(./images/GenericGreenRightArrow16.png);
 	width: 16px;
 	height: 16px;
 }
@@ -347,7 +347,7 @@ body {
 	left: 10px;
 }
 #zoomLevelIcon {
-	background-image: url(images/zoomlevels/zoom0.png);
+	background-image: url(./images/zoomlevels/zoom0.png);
 	width: 16px;
 	height: 16px;
 	position: absolute;
@@ -356,22 +356,22 @@ body {
 	z-index: 99;
 }
 .tabStatus {
-	background-image: url(images/IdentifyWindowShow16.png);
+	background-image: url(./images/IdentifyWindowShow16.png);
 	width: 16px;
 	height: 16px;
 }
 .tabSites {
-	background-image: url(images/LocationsSymbolized_A16.png);
+	background-image: url(./images/LocationsSymbolized_A16.png);
 	width: 16px;
 	height: 16px;
 }
 .tabMapTools {
-	background-image: url(images/MapAnalyze16.png);
+	background-image: url(./images/MapAnalyze16.png);
 	width: 16px;
 	height: 16px;
 }
 .tabDataTools {
-	background-image: url(images/TableQuery16.png);
+	background-image: url(./images/TableQuery16.png);
 	width: 16px;
 	height: 16px;
 }

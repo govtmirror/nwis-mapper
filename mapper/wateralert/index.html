@@ -273,6 +273,21 @@
 		var graphic;
 
 		function init() {
+		
+			var layersRequest = esri.request({
+			  url: '../../s3bucket.json',
+			  content: { f: "json" },
+			  handleAs: "json",
+			  callbackParamName: "callback"
+			});
+			layersRequest.then(
+			  function(response) {
+				addS3layers(response.s3bucket);
+				console.log("Success: ", response);
+			}, function(error) {
+				addS3layers('nwismapper');
+				console.log("Error: ", error);
+			});
 
 			// create popup instance
 			popup = new esri.dijit.Popup({}, dojo.create("div"));
@@ -403,46 +418,29 @@
 			// Tile and Graphics Overlays
 			// ============================================================
 
-			// add the additional thematic layers
+			// add the s3 layers
+			function addS3layers(s3bucket) {
 			
-			// hucs
-			var hucs = new esri.layers.WebTiledLayer("http://nwismapper.s3.amazonaws.com/hucs/${level}/${row}/${col}.png", {"id": "hucs", opacity: 0.3, visible: false}); 
-			map.addLayer(hucs);
-			
-			/*
-			defineTileLayerS3("hucs", "hucs", 0.3);
-			map.addLayer(new hucs());
-			drawTLayer("chkHUC", "hucs");
-			*/
-			
-			// aquifers
-			var pr_aq = new esri.layers.WebTiledLayer("http://nwismapper.s3.amazonaws.com/pr_aq/${level}/${row}/${col}.png", {"id": "pr_aq", visible: false}); 
-			map.addLayer(pr_aq);
-			
-			/*
-            defineTileLayerS3("pr_aq", "pr_aq", 1.0);
-            map.addLayer(new pr_aq());
-            drawTLayer("chkAQ", pr_aq);
-			*/
-			
-			// define NWIS tile cache overlay layers, add layers, but add them as invisible initially
-			var sw_act = new esri.layers.WebTiledLayer("http://nwismapper.s3.amazonaws.com/water-alert/sw_act/${level}/${row}/${col}.png", {"id": "sw_act", visible: false});
-			var sp_act = new esri.layers.WebTiledLayer("http://nwismapper.s3.amazonaws.com/water-alert/sp_act/${level}/${row}/${col}.png", {"id": "sp_act", visible: false});
-			var at_act = new esri.layers.WebTiledLayer("http://nwismapper.s3.amazonaws.com/water-alert/at_act/${level}/${row}/${col}.png", {"id": "at_act", visible: false});
-			var gw_act = new esri.layers.WebTiledLayer("http://nwismapper.s3.amazonaws.com/water-alert/gw_act/${level}/${row}/${col}.png", {"id": "gw_act", visible: false});
-			/*
-			defineTileLayerS3("sw_act", "sw_act", 1.0);
-			defineTileLayerS3("sp_act", "sp_act", 1.0);
-			defineTileLayerS3("at_act", "at_act", 1.0);
-			defineTileLayerS3("gw_act", "gw_act", 1.0);
-			*/
+				// hucs
+				var hucs = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/hucs/${level}/${row}/${col}.png", {"id": "hucs", opacity: 0.3, visible: false}); 
+				map.addLayer(hucs);
+				
+				// aquifers
+				var pr_aq = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/pr_aq/${level}/${row}/${col}.png", {"id": "pr_aq", visible: false}); 
+				map.addLayer(pr_aq);
+				
+				// define NWIS tile cache overlay layers, add layers, but add them as invisible initially
+				var sw_act = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/water-alert/sw_act/${level}/${row}/${col}.png", {"id": "sw_act", visible: false});
+				var sp_act = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/water-alert/sp_act/${level}/${row}/${col}.png", {"id": "sp_act", visible: false});
+				var at_act = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/water-alert/at_act/${level}/${row}/${col}.png", {"id": "at_act", visible: false});
+				var gw_act = new esri.layers.WebTiledLayer("http://" + s3bucket + ".s3.amazonaws.com/water-alert/gw_act/${level}/${row}/${col}.png", {"id": "gw_act", visible: false});
 
-			// add the overlays to the map, but invisible
-
-			map.addLayer(gw_act);
-			map.addLayer(at_act);
-			map.addLayer(sp_act);
-			map.addLayer(sw_act);
+				// add the overlays to the map, but invisible
+				map.addLayer(gw_act);
+				map.addLayer(at_act);
+				map.addLayer(sp_act);
+				map.addLayer(sw_act);
+			}
 
 			// define a selection layer overlay
 			defineGraphicLayer("sel_glayer", 1.0);

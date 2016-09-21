@@ -195,11 +195,11 @@
 								"touch /var/opt/BESClient/USGS_CHS.txt \n",
 								"service besclient restart \n",
 								
-								"echo \"{'s3bucket':{'" , {"Fn::FindInMap": ["Environment", {"Ref": "Environment"},"owis3bucket"]} , "'}\" > /tmp/s3bucket.json \n"
+								"echo \"{'s3bucket':'" , {"Fn::FindInMap": ["Environment", {"Ref": "Environment"},"owis3bucket"]} , "'}\" > /tmp/s3bucket.json \n",
 								
 								"wget https://raw.githubusercontent.com/USGS-OWI/nwis-mapper/master/server-config/server-setup.sh \n",
 								
-								"sh server-setup.sh \n",
+								"sh server-setup.sh \n"
 
 								
 							]

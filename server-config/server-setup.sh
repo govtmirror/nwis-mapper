@@ -6,15 +6,18 @@ USER=$SUDO_USER
 LIST_OF_MAIN_APPS="python python-dev python-pip git libgeos-dev libjpeg-dev zlib1g-dev apache2"
 LIST_OF_PYTHON_APPS="Mako cherrypy xlwt shapely pillow"
 
+#install cert
+wget https://raw.githubusercontent.com/USGS-OWI/nwis-mapper/master/server-config/DOIRootCA2.cer --no-check-certificate
+cp DOIRootCA2.cer /usr/local/share/ca-certificates/DOIRootCA2.crt
+update-ca-certificates
+
 #install apps
 apt-get update  # To get the latest package lists
 apt-get install -y $LIST_OF_MAIN_APPS
-wget https://bootstrap.pypa.io/get-pip.py
-python get-pip.py
-pip install --index-url=http://pypi.python.org/simple/ --trusted-host pypi.python.org $LIST_OF_PYTHON_APPS
+pip install $LIST_OF_PYTHON_APPS
 
 #get website content from github
-git clone https://github.com/USGS-OWI/nwis-mapper.git
+GIT_SSL_NO_VERIFY=true git clone https://github.com/USGS-OWI/nwis-mapper.git
 
 #copy bucket info file
 cp /tmp/s3bucket.json ${USER_HOME}/nwis-mapper/mapper/s3bucket.json

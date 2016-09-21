@@ -50,8 +50,8 @@
 			},
 			"Tags":
 			{
-				"ApplicationName"			: "OWI",
-				"Name"						: "OWI-Tester"
+				"ApplicationName"			: "NWIS Mapper",
+				"Name"						: "NWIS Mapper"
 			}
 		},
 		"OS":

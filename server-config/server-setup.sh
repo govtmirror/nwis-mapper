@@ -23,8 +23,6 @@ GIT_SSL_NO_VERIFY=true git clone https://github.com/USGS-OWI/nwis-mapper.git ${A
 #copy bucket info file (should have been placed by cloud formation)
 if [ -f /tmp/s3bucket.json ]; then
   cp /tmp/s3bucket.json ${APP_PATH}/nwis-mapper/mapper/s3bucket.json
-else
-  cp ${APP_PATH}/nwis-mapper/server-config/s3bucket.json ${APP_PATH}/nwis-mapper/mapper/s3bucket.json
 fi  
 
 #set proper permissions on nwis mapper folder

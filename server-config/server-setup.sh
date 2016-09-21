@@ -16,15 +16,19 @@ apt-get update  # To get the latest package lists
 apt-get install -y $LIST_OF_MAIN_APPS
 pip install $LIST_OF_PYTHON_APPS
 
-#get website content from github
+#get repo from github
 GIT_SSL_NO_VERIFY=true git clone https://github.com/USGS-OWI/nwis-mapper.git
 
-#copy bucket info file
-cp /tmp/s3bucket.json ${USER_HOME}/nwis-mapper/mapper/s3bucket.json
+#copy bucket info file (should have been placed by cloud formation)
+if [ -f /tmp/s3bucket.json ]; then
+  cp /tmp/s3bucket.json ${USER_HOME}/nwis-mapper/mapper/s3bucket.json
+else
+  cp ${USER_HOME}/nwis-mapper/server-config/s3bucket.json ${USER_HOME}/nwis-mapper/mapper/s3bucket.json
+fi  
 
 #set proper permissions on nwis mapper folder
-chown ubuntu -R ${USER_HOME}/nwis-mapper
-chgrp ubuntu -R ${USER_HOME}/nwis-mapper
+chown ${SUDO_USER} -R ${USER_HOME}/nwis-mapper
+chgrp ${SUDO_USER} -R ${USER_HOME}/nwis-mapper
 chmod +x ${USER_HOME}/nwis-mapper/server-config/chkCherry.sh
 
 #create symbolic link

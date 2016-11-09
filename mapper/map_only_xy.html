@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "https://www.w3.org/TR/html4/strict.dtd">
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
@@ -8,8 +8,8 @@
 		<meta name="publisher" content="USGS - U.S. Geological Survey, Water Resources">
 		<meta name="expires" content="never">
 		<title>Water Resources of the United States&mdash;National Water Information System (NWIS) Mapper</title>
-		<link rel="stylesheet" href="http://js.arcgis.com/3.13/dijit/themes/claro/claro.css">
-		<link rel="stylesheet" href="http://js.arcgis.com/3.13/esri/css/esri.css">
+		<link rel="stylesheet" href="https://js.arcgis.com/3.13/dijit/themes/claro/claro.css">
+		<link rel="stylesheet" href="https://js.arcgis.com/3.13/esri/css/esri.css">
 
 		<style type="text/css">
 			html, body {height:100%;width:100%;margin:0;padding:0;}
@@ -20,7 +20,7 @@
 		</style>
 
 		<script type="text/javascript">var dojoConfig = {parseOnLoad:true};</script>
-		<script src="http://js.arcgis.com/3.13/"></script>
+		<script src="https://js.arcgis.com/3.13/"></script>
 		<script type="text/javascript">
 			dojo.addOnLoad( function() {
 				init();
@@ -44,6 +44,9 @@
 		</script>
 
 		<script type="text/javascript">
+
+			//config variables
+			var waterdataURL = 'https://staging.waterdata.usgs.gov';
 
 			// global map variables
 			var map, popup;
@@ -100,7 +103,7 @@
 				//});
 
 				// define and add basemap
-				var url = "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer";
+				var url = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer";
 				var tiledLayer = new esri.layers.ArcGISTiledMapServiceLayer(url);
 				map.addLayer(tiledLayer);
 				
@@ -133,10 +136,10 @@
 
 				//add hydro basemap
 				var HydroBasemapLayer = new esri.dijit.BasemapLayer({
-				  url:"http://hydrology.esri.com/arcgis/rest/services/WorldHydroReferenceOverlay/MapServer"
+				  url:"https://hydrology.esri.com/arcgis/rest/services/WorldHydroReferenceOverlay/MapServer"
 				});
 				var TerrainBasemapLayer = new esri.dijit.BasemapLayer({
-				  url:"http://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer"
+				  url:"https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer"
 				});
 				
 				var hydroBasemap = new esri.dijit.Basemap({
@@ -181,7 +184,7 @@
 			
 			function drawSite() {
 			
-				var web_proxy_url = "http://maps.waterdata.usgs.gov/mapper/nwis/site/?";
+				var web_proxy_url = "./nwis/site/?";
 			
 				// set the site number
 				web_proxy_url += "sites=" + siteNo;
@@ -210,7 +213,7 @@
 			
 				var markers;
 				var siteTemplate = new esri.InfoTemplate("Site Information",
-					"<b>Site Number: </b>${site_no}<br /><b>Site Name: </b> ${site_name}<br /><b>Site Type: </b> ${siteTypeText}<br /><b>Agency: </b>${agency}<br /><a href=http://waterdata.usgs.gov/nwis/inventory?agency_code=${agency}&site_no=${site_no} target='_blank'>Access Data</a><br/><a href=http://maps.waterdata.usgs.gov/mapper/index.html?MapCenterX=${lng}&MapCenterY=${lat}&MapZoom=${MapZoom}&SiteGroups=${siteType},act,${siteType},ina target='_blank'>Open in NWIS Mapper</a>");
+					"<b>Site Number: </b>${site_no}<br /><b>Site Name: </b> ${site_name}<br /><b>Site Type: </b> ${siteTypeText}<br /><b>Agency: </b>${agency}<br /><a href=" + waterdataURL + "/nwis/inventory?agency_code=${agency}&site_no=${site_no} target='_blank'>Access Data</a><br/><a href=./index.html?MapCenterX=${lng}&MapCenterY=${lat}&MapZoom=${MapZoom}&SiteGroups=${siteType},act,${siteType},ina target='_blank'>Open in NWIS Mapper</a>");
 			
 				var single_sites = xml.getElementsByTagName("sites");
 			

@@ -44,7 +44,7 @@ class root:
 		# reasonably well formed
 
 		# build base url
-		web_query_url = "http://waterservices.usgs.gov/nwis/site?"
+		web_query_url = "https://waterservices.usgs.gov/nwis/site?"
 
 		# add the bouunding box parameters
 		web_query_url = web_query_url + "bBox=" + bbox
@@ -95,7 +95,7 @@ class root:
 					site_agc = sites.getAttribute("agc")
 					site_lng = sites.getAttribute("lng")
 					site_lat = sites.getAttribute("lat")
-					site_url = "http://waterdata.usgs.gov/nwis/inventory?agency_code=" + site_agc + "&site_no=" + site_no
+					site_url = "https://waterdata.usgs.gov/nwis/inventory?agency_code=" + site_agc + "&site_no=" + site_no
 
 					# create a new tuple from the variables
 					siteRecord = (site_no, site_name, site_cat, site_agc, site_lng, site_lat, site_url)
@@ -393,7 +393,7 @@ def sendRDB(bbox, scodes, siteRecords):
 	# close the file
 	fp.close()
 
-	rdbOut = "# Tab-delimited output format (http://waterdata.usgs.gov/nwis?tab_delimited_format_info)\n"
+	rdbOut = "# Tab-delimited output format (https://waterdata.usgs.gov/nwis?tab_delimited_format_info)\n"
 	rdbOut += "SiteNumber\tSiteName\tSiteCategory\tSiteAgency\tSiteLongitude\tSiteLatitude\tSiteNWISURL\n"
 	rdbOut += "25S\t50S\t2S\t10S\t15N\t15N\t100S\n"
 	for site in siteRecords:

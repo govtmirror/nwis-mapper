@@ -215,7 +215,7 @@ class root:
 		googleX, googleY = mercator.GoogleTile(tileX, tileY, zoomLevel)
 
 		# build the tile name
-		tileFile = "http://" + tileURL
+		tileFile = "https://" + tileURL
 
 		# the ESRI tile naming is based on Lxx/Rxxxxxxxx/Cxxxxxx.png
 		if cacheFormat == "ESRI":

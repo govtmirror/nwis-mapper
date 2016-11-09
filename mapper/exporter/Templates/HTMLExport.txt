@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "https://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
@@ -7,7 +7,7 @@
 <title>List of Sites on Map</title>
 </head>
 <body>
-<a href="http://www.usgs.gov/"> <img src="http://maps.waterdata.usgs.gov/mapper/images/header_graphic_usgsIdentifier_white.jpg" alt="USGS - science for a changing world" title="U.S. Geological Survey Home Page" width="178" height="72" /> </a>
+<a href="https://www.usgs.gov/"> <img src="https://maps.waterdata.usgs.gov/mapper/images/header_graphic_usgsIdentifier_white.jpg" alt="USGS - science for a changing world" title="U.S. Geological Survey Home Page" width="178" height="72" /> </a>
 <h1>List of Sites from NWIS Mapper</h1>
 <hr>
 ${meta}

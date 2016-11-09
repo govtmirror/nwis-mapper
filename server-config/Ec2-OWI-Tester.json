@@ -155,8 +155,8 @@
 
                                 "set -x \n",
 
-                                "inst=\"IGS" , {"Fn::FindInMap": ["Environment", {"Ref": "Environment"},"ADCustomerOU"]}, "\"`curl http://169.254.169.254/latest/meta-data/instance-id` \n",
-                                "ip=`curl http://169.254.169.254/latest/meta-data/local-ipv4` \n",
+                                "inst=\"IGS" , {"Fn::FindInMap": ["Environment", {"Ref": "Environment"},"ADCustomerOU"]}, "\"`curl https://169.254.169.254/latest/meta-data/instance-id` \n",
+                                "ip=`curl https://169.254.169.254/latest/meta-data/local-ipv4` \n",
 
                                 "strHostName=${inst:0:14}\".usgs.chs.ead\" \n",
                                 "#Setting hostname \n",

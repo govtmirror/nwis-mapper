@@ -68,7 +68,7 @@ NWISMapperExport File (Site Data)
 			Fort Wayne, IN, USA).
 			
 		Site NWIS URL - the web link to the NWIS online database for the site.
-			Example: http://waterdata.usgs.gov/nwis/inventory?agency_code=USGS&site_no=11502500
+			Example: https://waterdata.usgs.gov/nwis/inventory?agency_code=USGS&site_no=11502500
 
 	Description of Export Formats
 

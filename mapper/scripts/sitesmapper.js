@@ -40,11 +40,11 @@ function showQueryParameters() {
 function getQuery(queryURL) {
 	
 	//check for the two possible urls, which each need to be proxied seperately
-	if (queryURL.indexOf("http://nwis.waterdata.usgs.gov") != -1) {
+	if (queryURL.indexOf("https://nwis.waterdata.usgs.gov") != -1) {
 		//proxy workaround
 		//---------------------
-		//baseURL is remapped to http://waterdata.usgs.gov using .htaccess
-		var baseURL = "http://maps.waterdata.usgs.gov/mapper/nwissitesmapper";
+		//baseURL is remapped to https://waterdata.usgs.gov using .htaccess
+		var baseURL = "https://maps.waterdata.usgs.gov/mapper/nwissitesmapper";
 		//this is the url chunk before the NWIS params can vary by user path into NWISweb
 		var appendURL = queryURL.substring(30,queryURL.indexOf("?")) + "?";
 		//this is the parameter section of the NWIS URL
@@ -53,7 +53,7 @@ function getQuery(queryURL) {
 		nwisWebURL_proxy = baseURL + appendURL + NWISparams
 		//get site coutner before doing anything else
 		nwisWebURL_proxy.replace(/&/g,"$");
-		var counterURL = "http://maps.waterdata.usgs.gov/mapper/sitecounter/?mapperURL=" + nwisWebURL_proxy.replace(/&/g,"$");
+		var counterURL = "https://maps.waterdata.usgs.gov/mapper/sitecounter/?mapperURL=" + nwisWebURL_proxy.replace(/&/g,"$");
 		var xmlLoadCounter = 
 		{
 			url: counterURL,
@@ -65,11 +65,11 @@ function getQuery(queryURL) {
 	}
 		
 //check for the two possible urls, which easy need to be proxied seperately
-	else if (queryURL.indexOf("http://waterdata.usgs.gov") != -1) {
+	else if (queryURL.indexOf("https://waterdata.usgs.gov") != -1) {
 		//proxy workaround
 		//---------------------
-		//baseURL is remapped to http://waterdata.usgs.gov using .htaccess
-		var baseURL = "http://maps.waterdata.usgs.gov/mapper/sitesmapper";
+		//baseURL is remapped to https://waterdata.usgs.gov using .htaccess
+		var baseURL = "https://maps.waterdata.usgs.gov/mapper/sitesmapper";
 		//this is the url chunk before the NWIS params can vary by user path into NWISweb
 		var appendURL = queryURL.substring(25,queryURL.indexOf("?")) + "?";
 		//this is the parameter section of the NWIS URL
@@ -77,7 +77,7 @@ function getQuery(queryURL) {
 		//final URL
 		nwisWebURL_proxy = baseURL + appendURL + NWISparams
 		//get site count -- have to replace & with $ or else URL wont get sent to cherrypy correctly
-		var counterURL = "http://maps.waterdata.usgs.gov/mapper/sitecounter/?mapperURL=" + nwisWebURL_proxy.replace(/&/g,"$");
+		var counterURL = "https://maps.waterdata.usgs.gov/mapper/sitecounter/?mapperURL=" + nwisWebURL_proxy.replace(/&/g,"$");
 		var xmlLoadCounter = 
 		{
 			url: counterURL,
@@ -360,7 +360,7 @@ function draw_NWISweb_hull() {
 
 function formatSitesMapperUrl(baseUrl) {
 	var siteNumberText = baseUrl.split("site_no=");
-	return "<a href=http://waterdata.usgs.gov/nwis/inventory?agency_code=" + baseUrl + " target='_blank'>" + siteNumberText[1] + "</a>";
+	return "<a href=https://waterdata.usgs.gov/nwis/inventory?agency_code=" + baseUrl + " target='_blank'>" + siteNumberText[1] + "</a>";
 } 
 
 function makeSiteGrids_NWISweb() {
@@ -481,7 +481,7 @@ function setExport(tabCode) {
 function makeExportFile() {
 
 	// need to build the URL for the exporter web service
-	var expURL = "http://maps.waterdata.usgs.gov/mapper/exportSM/?mapperURL=";
+	var expURL = "https://maps.waterdata.usgs.gov/mapper/exportSM/?mapperURL=";
 	
 	var modURL = nwisWebURL_proxy.replace(/&/g,"$");
 	expURL += modURL;
@@ -615,7 +615,7 @@ function showUSGSOffices() {
 						// build the html popup info if user has not submitted a custom site
 						if (url == "") {
 							siteTemplate = new esri.InfoTemplate("USGS Water Office Information",
-							"<b>${office}</b><br />${city}, ${state} ${zip}<br /><b>Phone: </b>${phone}<br /><a href=http://" + state + ".water.usgs.gov target='_blank'>Water Science Center Home Page</a>");
+							"<b>${office}</b><br />${city}, ${state} ${zip}<br /><b>Phone: </b>${phone}<br /><a href=https://" + state + ".water.usgs.gov target='_blank'>Water Science Center Home Page</a>");
 							attr = {"office":office, "city":city, "state":state, "zip":zip, "phone":phone};
 						} else {
 							siteTemplate = new esri.InfoTemplate("USGS Water Office Information",
@@ -720,7 +720,7 @@ function defineTileLayer2(layerName, agsName, op) {
 			},
 
 			getTileUrl:	function(level,	row, col) {
-				return "http://107.21.119.135/mapper/tiles/" + layerName + "/NWIS/_alllayers/" +
+				return "https://107.21.119.135/mapper/tiles/" + layerName + "/NWIS/_alllayers/" +
 					"L" + dojo.string.pad(level, 2, '0') + "/" +
 					"R" + dojo.string.pad(row.toString(16), 8, '0') + "/" +
 					"C" + dojo.string.pad(col.toString(16), 8, '0') + "." +
@@ -782,10 +782,10 @@ function createBasemapGallery() {
 
 	//add hydro basemap
 	var HydroBasemapLayer = new esri.dijit.BasemapLayer({
-	  url:"http://hydrology.esri.com/arcgis/rest/services/WorldHydroReferenceOverlay/MapServer"
+	  url:"https://hydrology.esri.com/arcgis/rest/services/WorldHydroReferenceOverlay/MapServer"
 	});
 	var TerrainBasemapLayer = new esri.dijit.BasemapLayer({
-	  url:"http://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer"
+	  url:"https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer"
 	});
 	
 	var hydroBasemap = new esri.dijit.Basemap({

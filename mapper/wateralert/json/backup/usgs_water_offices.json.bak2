@@ -152,6 +152,6 @@
 {"ID":"7","OFFICE":"WY Field Office","CITY":"Casper","STATE":"WY","ZIP":"82604","LONGDD":"-106.363048","LATDD":"42.828704","PHONE":"(307) 261-5485","URL":""},
 {"ID":"162","OFFICE":"Wyoming Water Science Center","CITY":"Cheyenne","STATE":"WY","ZIP":"82007","LONGDD":"-104.738003","LATDD":"41.128865","PHONE":"(307) 778-2931}","URL":""},
 {"ID":"89","OFFICE":"WY Field Office","CITY":"Riverton","STATE":"WY","ZIP":"82501","LONGDD":"-108.375072","LATDD":"43.0124","PHONE":"(307) 856-3771","URL":""},
-{"ID":"189","OFFICE":"USGS Headquarters","CITY":"Reston","STATE":"VA","ZIP":"20192","LONGDD":"-77.3676500","LATDD":"38.94608","PHONE":"(703) 648-5014","URL":"http://www.usgs.gov"}
+{"ID":"189","OFFICE":"USGS Headquarters","CITY":"Reston","STATE":"VA","ZIP":"20192","LONGDD":"-77.3676500","LATDD":"38.94608","PHONE":"(703) 648-5014","URL":"https://www.usgs.gov"}
 ]
 }

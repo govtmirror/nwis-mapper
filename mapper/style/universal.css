@@ -21,7 +21,7 @@
    the custom CSS file and modifying their properties in that file. 
 */
 .banner {
-	background-image: url("http://www.usgs.gov/images/banners/hazards.gif");
+	background-image: url("https://www.usgs.gov/images/banners/hazards.gif");
 	background-repeat: no-repeat;
 	background-color: #006633;
 }

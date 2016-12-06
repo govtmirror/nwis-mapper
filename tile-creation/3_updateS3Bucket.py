@@ -4,7 +4,7 @@
 #    
 # Requirements:  Amazon AWS CLI tools with a profile configured using 
 # access ID and secret key, in this case "WIM", see:
-# http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html
+# https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html
 #
 # USAGE: pass in tile cache path
 # python 3_updateS3Bucket.py D:/cache s3://nwismapper

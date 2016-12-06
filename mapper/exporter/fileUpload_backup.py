@@ -18,7 +18,7 @@ class FileDemo(object):
         out = """<html>
         <head>
         <title>NWIS Mapper</title>
-        <meta http-equiv="REFRESH" content="0;url=http://maps.waterdata.usgs.gov/mapper/nwisquery.html?URL=http://waterdata.usgs.gov/usa/nwis/inventory?multiple_site_no=%s&format=sitefile_output&sort_key=site_no&sitefile_output_format=xml&column_name=agency_cd&column_name=site_no&column_name=station_nm&list_of_search_criteria=multiple_site_no&column_name=site_tp_cd&column_name=dec_lat_va&column_name=dec_long_va&column_name=agency_use_cd"></HEAD>
+        <meta http-equiv="REFRESH" content="0;url=https://maps.waterdata.usgs.gov/mapper/nwisquery.html?URL=https://waterdata.usgs.gov/usa/nwis/inventory?multiple_site_no=%s&format=sitefile_output&sort_key=site_no&sitefile_output_format=xml&column_name=agency_cd&column_name=site_no&column_name=station_nm&list_of_search_criteria=multiple_site_no&column_name=site_tp_cd&column_name=dec_lat_va&column_name=dec_long_va&column_name=agency_use_cd"></HEAD>
         <BODY>
         You are being redirected
         </BODY>

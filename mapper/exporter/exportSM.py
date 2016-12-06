@@ -34,10 +34,10 @@ class root:
 
 		#strip proxied URL back to non proxied
 		NWISqueryURL = tempURL
-		if tempURL.find("http://maps.waterdata.usgs.gov/mapper/sitesmapper") != -1:
-			NWISqueryURL = NWISqueryURL.replace("http://maps.waterdata.usgs.gov/mapper/sitesmapper","http://waterdata.usgs.gov")
-		elif tempURL.find("http://maps.waterdata.usgs.gov/mapper/nwissitesmapper") != -1:
-			NWISqueryURL = NWISqueryURL.replace("http://maps.waterdata.usgs.gov/mapper/nwissitesmapper","http://nwis.waterdata.usgs.gov")
+		if tempURL.find("https://maps.waterdata.usgs.gov/mapper/sitesmapper") != -1:
+			NWISqueryURL = NWISqueryURL.replace("https://maps.waterdata.usgs.gov/mapper/sitesmapper","https://waterdata.usgs.gov")
+		elif tempURL.find("https://maps.waterdata.usgs.gov/mapper/nwissitesmapper") != -1:
+			NWISqueryURL = NWISqueryURL.replace("https://maps.waterdata.usgs.gov/mapper/nwissitesmapper","https://nwis.waterdata.usgs.gov")
 
 		# pass the query to the NWIS Sitefile Web Service
 		try:
@@ -61,7 +61,7 @@ class root:
 			site_agc = child.find("agency_cd").text
 			site_lng = child.find("dec_long_va").text
 			site_lat = child.find("dec_lat_va").text
-			site_url = "http://waterdata.usgs.gov/nwis/inventory?agency_code=" + site_agc + "&site_no=" + site_no
+			site_url = "https://waterdata.usgs.gov/nwis/inventory?agency_code=" + site_agc + "&site_no=" + site_no
 
 			# create a new tuple from the variables
 			siteRecord = (site_no, site_name, site_cat, site_agc, site_lng, site_lat, site_url)
@@ -356,7 +356,7 @@ def sendRDB(siteRecords, NWISqueryURL):
 	# close the file
 	fp.close()
 
-	rdbOut = "# Tab-delimited output format (http://waterdata.usgs.gov/nwis?tab_delimited_format_info)\n"
+	rdbOut = "# Tab-delimited output format (https://waterdata.usgs.gov/nwis?tab_delimited_format_info)\n"
 	rdbOut += "SiteNumber\tSiteName\tSiteCategory\tSiteAgency\tSiteLongitude\tSiteLatitude\tSiteNWISURL\n"
 	rdbOut += "25S\t50S\t2S\t10S\t15N\t15N\t100S\n"  
 	for site in siteRecords:
@@ -432,7 +432,7 @@ def sendKML(siteRecords, NWISqueryURL, NWISqueryURL_proxy):
 		"""Create the overall KML document."""
 		doc = xml.dom.minidom.Document()
 		kml = doc.createElement('kml')
-		kml.setAttribute('xmlns', 'http://www.opengis.net/kml/2.2')
+		kml.setAttribute('xmlns', 'https://www.opengis.net/kml/2.2')
 		doc.appendChild(kml)
 		document = doc.createElement('Document')
 		kml.appendChild(document)
@@ -457,7 +457,7 @@ def sendKML(siteRecords, NWISqueryURL, NWISqueryURL_proxy):
 		name.appendChild(name_text)
 		desc = doc.createElement("description")
 		pm.appendChild(desc)
-		desc_text = doc.createTextNode('<b>Site: </b>' + site.find("site_no").text + '</br><b>Site Name: </b>' + site.find("station_nm").text + '</br><b>Agency: </b>' + child.find("agency_cd").text + '</br><a href="http://waterdata.usgs.gov/nwis/inventory?agency_code=' + child.find("agency_cd").text + '&amp;site_no=' + site.find("site_no").text + '">Access Data</a>')
+		desc_text = doc.createTextNode('<b>Site: </b>' + site.find("site_no").text + '</br><b>Site Name: </b>' + site.find("station_nm").text + '</br><b>Agency: </b>' + child.find("agency_cd").text + '</br><a href="https://waterdata.usgs.gov/nwis/inventory?agency_code=' + child.find("agency_cd").text + '&amp;site_no=' + site.find("site_no").text + '">Access Data</a>')
 		desc.appendChild(desc_text)
 		pt = doc.createElement("Point")
 		pm.appendChild(pt)

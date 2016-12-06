@@ -178,7 +178,7 @@ class fileUpload:
         FeatureCollection["metadata"]["fields"] = fieldList
         FeatureCollection["metadata"]["infoTemplate"] = {}
         FeatureCollection["metadata"]["infoTemplate"]["title"] = "Info Template Title"
-        FeatureCollection["metadata"]["infoTemplate"]["content"] = "<b>ID: ${ID}</b><br /><br />Other info<br /><a href=http://usgs.gov target='_blank'>Hyperlink</a>"
+        FeatureCollection["metadata"]["infoTemplate"]["content"] = "<b>ID: ${ID}</b><br /><br />Other info<br /><a href=https://usgs.gov target='_blank'>Hyperlink</a>"
         FeatureCollection["metadata"]["symbol"] = {}
         
         if lyrType == "Point":

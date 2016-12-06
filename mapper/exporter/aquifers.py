@@ -175,7 +175,7 @@ class root:
 		esriCol =  "C" +  paddedHex(googleX) + ".png"
 
 		tileFile = "/var/www/mapper/sandbox/dmc/tiles/pr_aq/" + esriLevel + "/" + esriRow + "/" + esriCol
-		#tileFile = "http://nwis-mapper-tiles.s3.amazonaws.com/pr_aq/" + esriLevel + "/" + esriRow + "/" + esriCol
+		#tileFile = "https://nwis-mapper-tiles.s3.amazonaws.com/pr_aq/" + esriLevel + "/" + esriRow + "/" + esriCol
 		
 		# we have the point the user clicked on and we figured out from that
 		# coordinate which tile was clicked on. Now we need the origin of that tile

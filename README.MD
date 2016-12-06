@@ -29,9 +29,9 @@ the nwis mapper application should now be running @ localhost
 ## Generate new NWIS mapper tile cache
 
 ##### required software
->[ESRI ArcGIS Desktop ~10.3.1](http:/esri.com)   
+>[ESRI ArcGIS Desktop ~10.3.1](https:/esri.com)   
 >[Python 2.7](https://www.python.org/download/releases/2.7/)  
->[Python Pillow image library](http://pillow.readthedocs.org/en/3.0.x/installation.html)  
+>[Python Pillow image library](https://pillow.readthedocs.org/en/3.0.x/installation.html)  
 >[AWS CLI](https://aws.amazon.com/cli/)
 
 #### 1.  Run script to pull NWIS sites from USGS waterservices (tile-creation/1_getNWISSites.py)

@@ -187,10 +187,10 @@ if __name__ == "__main__":
                 print
 
                 #set up base url
-                baseURL = "http://waterservices.usgs.gov/nwis/site/?"
+                baseURL = "https://waterservices.usgs.gov/nwis/site/?"
 
                 #NWIS request arguments 
-                # http://waterservices.usgs.gov/rest/Site-Service.html
+                # https://waterservices.usgs.gov/rest/Site-Service.html
                 query_args = { 
                     'format':'mapper,1.0', 
                     'siteType':curSiteTypeList, 

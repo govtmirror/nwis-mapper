@@ -11,7 +11,7 @@ function getLocation() {
 	//get IP data with AJAX call
 	var request = esri.request({
 	  // Location of the data
-	  url: "http://freegeoip.net/json/",
+	  url: "https://freegeoip.net/json/",
 	  // Data format
 	  handleAs: "json",
 	  timeout: 3000,
@@ -367,7 +367,6 @@ function getIVdata(siteGroup) {
 		//get IV data with AJAX call
 		var request = esri.request({
 		  // Location of the data
-		  //url: "http://waterservices.usgs.gov/nwis/iv/?",
 		  url: "/mapper/wamapper/?",
 		  // Service parameters if required, sent with URL as key/value pairs
 		  
@@ -446,7 +445,7 @@ function getIVdata(siteGroup) {
 					if (hasDataCode == "w2") {subscribeType = "qw";}
 						
 					//add water alert subscribe button				
-					waterAlertDataNew += "<br /><button data-dojo-type='dijit/form/Button' style='font-size:small;' onClick='window.open(\"" + "http://water.usgs.gov/wateralert/subscribe2/index.html?site_no=" + graphics2[f].attributes.site_no + "&type_cd=" + subscribeType + "\")' type='button'>Subscribe to WaterAlert</button>";
+					waterAlertDataNew += "<br /><button data-dojo-type='dijit/form/Button' style='font-size:small;' onClick='window.open(\"" + "https://water.usgs.gov/wateralert/subscribe2/index.html?site_no=" + graphics2[f].attributes.site_no + "&type_cd=" + subscribeType + "\")' type='button'>Subscribe to WaterAlert</button>";
 					
 					//update site template
 					graphics2[f].setAttributes( {"site_no":graphics[f].attributes.site_no, "site_name":graphics[f].attributes.site_name, "siteTypeText":graphics[f].attributes.siteTypeText, "agency":graphics[f].attributes.agency, "waterAlertData":waterAlertDataNew });
@@ -486,7 +485,6 @@ function getIVdata_singlesite(siteNo, siteGroup) {
 			//get IV data with AJAX call
 			var request = esri.request({
 			  // Location of the data
-			  //url: "http://waterservices.usgs.gov/nwis/iv/?",
 			  url: "/mapper/wamapper/?",
 			  // Service parameters if required, sent with URL as key/value pairs
 			  
@@ -553,7 +551,7 @@ function getIVdata_singlesite(siteNo, siteGroup) {
 				if (hasDataCode == "w2") {subscribeType = "qw";}
 					
 				//add water alert subscribe button				
-				waterAlertDataNew += "<br /><button data-dojo-type='dijit/form/Button' style='font-size:small;' onClick='window.open(\"" + "http://water.usgs.gov/wateralert/subscribe2/index.html?site_no=" + graphics2[f].attributes.site_no + "&type_cd=" + subscribeType + "\")' type='button'>Subscribe to WaterAlert</button>";
+				waterAlertDataNew += "<br /><button data-dojo-type='dijit/form/Button' style='font-size:small;' onClick='window.open(\"" + "https://water.usgs.gov/wateralert/subscribe2/index.html?site_no=" + graphics2[f].attributes.site_no + "&type_cd=" + subscribeType + "\")' type='button'>Subscribe to WaterAlert</button>";
 				
 				//update site template
 				graphics2[f].setAttributes( {"site_no":graphics[f].attributes.site_no, "site_name":graphics[f].attributes.site_name, "siteTypeText":graphics[f].attributes.siteTypeText, "agency":graphics[f].attributes.agency, "waterAlertData":waterAlertDataNew });
@@ -651,7 +649,7 @@ function setLayersFromURL() {
 function drawSitesByType(siteType) {
 
 	// declare webservice url and build first the proxy service
-	//var web_proxy_url = "http://waterservices.usgs.gov/nwis/site/?";
+	//var web_proxy_url = "https://waterservices.usgs.gov/nwis/site/?";
 	var web_proxy_url = "/mapper/nwis/site/?";
 	
 	// calculate bounding box for web service query
@@ -803,12 +801,12 @@ function setMarkers_chkSWAct(xml, ioargs) {
 				if (hasDataCode == "w2") {subscribeType = "qw";}
 				
 				//setup subscribe button in the event the getIVdata function fails
-				var waterAlertData = "<hr><button data-dojo-type='dijit/form/Button' style='font-size:small;' onClick='window.open(\"" + "http://water.usgs.gov/wateralert/subscribe2/index.html?site_no=" + site_no  + "&type_cd=" + subscribeType + "\")' type='button'>Subscribe to WaterAlert</button>";
+				var waterAlertData = "<hr><button data-dojo-type='dijit/form/Button' style='font-size:small;' onClick='window.open(\"" + "https://water.usgs.gov/wateralert/subscribe2/index.html?site_no=" + site_no  + "&type_cd=" + subscribeType + "\")' type='button'>Subscribe to WaterAlert</button>";
 
 				// build the symbol
 				var point = esri.geometry.geographicToWebMercator(new esri.geometry.Point(parseFloat(markers[nmarkers].getAttribute("lng")), parseFloat(markers[nmarkers].getAttribute("lat")),  new esri.SpatialReference({ wkid: 4326 })));
 				var attr = {"site_no":site_no, "site_name":site_name, "siteTypeText":siteTypeText, "agency":agency, "waterAlertData":waterAlertData };										
-				var siteTemplate = new esri.InfoTemplate("Site Information","<b>Site Number: </b>${site_no}<br /><b>Site Name: </b> ${site_name}<br /><b>Site Type: </b> ${siteTypeText}<br /><b>Agency: </b>${agency}<br /><a href=http://waterdata.usgs.gov/nwis/" + nwisDataType + "?agency_code=${agency}&site_no=${site_no} target='_blank'>Access Data</a><br />${waterAlertData}");						
+				var siteTemplate = new esri.InfoTemplate("Site Information","<b>Site Number: </b>${site_no}<br /><b>Site Name: </b> ${site_name}<br /><b>Site Type: </b> ${siteTypeText}<br /><b>Agency: </b>${agency}<br /><a href=./nwis/" + nwisDataType + "?agency_code=${agency}&site_no=${site_no} target='_blank'>Access Data</a><br />${waterAlertData}");						
 				var marker = new esri.Graphic(point, icon, attr, siteTemplate);
 				
 				// add symbol to graphics layer
@@ -906,12 +904,12 @@ function setMarkers_chkGWAct(xml, ioargs) {
 				if (hasDataCode == "w2") {subscribeType = "qw";}
 
 				//setup subscribe button in the event the getIVdata function fails
-				var waterAlertData = "<hr><button data-dojo-type='dijit/form/Button' style='font-size:small;' onClick='window.open(\"" + "http://water.usgs.gov/wateralert/subscribe2/index.html?site_no=" + site_no + "&site_name=" + site_name + "&type_cd=" + subscribeType + "\")' type='button'>Subscribe to WaterAlert</button>";
+				var waterAlertData = "<hr><button data-dojo-type='dijit/form/Button' style='font-size:small;' onClick='window.open(\"" + "https://water.usgs.gov/wateralert/subscribe2/index.html?site_no=" + site_no + "&site_name=" + site_name + "&type_cd=" + subscribeType + "\")' type='button'>Subscribe to WaterAlert</button>";
 
 				// build the symbol
 				var point = esri.geometry.geographicToWebMercator(new esri.geometry.Point(parseFloat(markers[nmarkers].getAttribute("lng")), parseFloat(markers[nmarkers].getAttribute("lat")),  new esri.SpatialReference({ wkid: 4326 })));
 				var attr = {"site_no":site_no, "site_name":site_name, "siteTypeText":siteTypeText, "agency":agency, "waterAlertData":waterAlertData };										
-				var siteTemplate = new esri.InfoTemplate("Site Information","<b>Site Number: </b>${site_no}<br /><b>Site Name: </b> ${site_name}<br /><b>Site Type: </b> ${siteTypeText}<br /><b>Agency: </b>${agency}<br /><a href=http://waterdata.usgs.gov/nwis/" + nwisDataType + "?agency_code=${agency}&site_no=${site_no} target='_blank'>Access Data</a><br />${waterAlertData}");	
+				var siteTemplate = new esri.InfoTemplate("Site Information","<b>Site Number: </b>${site_no}<br /><b>Site Name: </b> ${site_name}<br /><b>Site Type: </b> ${siteTypeText}<br /><b>Agency: </b>${agency}<br /><a href=" + waterdataURL + "/nwis/" + nwisDataType + "?agency_code=${agency}&site_no=${site_no} target='_blank'>Access Data</a><br />${waterAlertData}");	
 				var marker = new esri.Graphic(point, icon, attr, siteTemplate);
 		
 				// add symbol to graphics layer
@@ -1007,12 +1005,12 @@ function setMarkers_chkSPAct(xml, ioargs) {
 				if (hasDataCode == "w2") {subscribeType = "qw";}	
 							
 				//setup subscribe button in the event the getIVdata function fails
-				var waterAlertData = "<hr><button data-dojo-type='dijit/form/Button' style='font-size:small;' onClick='window.open(\"" + "http://water.usgs.gov/wateralert/subscribe2/index.html?site_no=" + site_no + "&site_name=" + site_name + "&type_cd=" + subscribeType + "\")' type='button'>Subscribe to WaterAlert</button>";
+				var waterAlertData = "<hr><button data-dojo-type='dijit/form/Button' style='font-size:small;' onClick='window.open(\"" + "https://water.usgs.gov/wateralert/subscribe2/index.html?site_no=" + site_no + "&site_name=" + site_name + "&type_cd=" + subscribeType + "\")' type='button'>Subscribe to WaterAlert</button>";
 
 				// build the symbol
 				var point = esri.geometry.geographicToWebMercator(new esri.geometry.Point(parseFloat(markers[nmarkers].getAttribute("lng")), parseFloat(markers[nmarkers].getAttribute("lat")),  new esri.SpatialReference({ wkid: 4326 })));
 				var attr = {"site_no":site_no, "site_name":site_name, "siteTypeText":siteTypeText, "agency":agency, "waterAlertData":waterAlertData };										
-				var siteTemplate = new esri.InfoTemplate("Site Information","<b>Site Number: </b>${site_no}<br /><b>Site Name: </b> ${site_name}<br /><b>Site Type: </b> ${siteTypeText}<br /><b>Agency: </b>${agency}<br /><a href=http://waterdata.usgs.gov/nwis/" + nwisDataType + "?agency_code=${agency}&site_no=${site_no} target='_blank'>Access Data</a><br />${waterAlertData}");	
+				var siteTemplate = new esri.InfoTemplate("Site Information","<b>Site Number: </b>${site_no}<br /><b>Site Name: </b> ${site_name}<br /><b>Site Type: </b> ${siteTypeText}<br /><b>Agency: </b>${agency}<br /><a href=" + waterdataURL + "/nwis/" + nwisDataType + "?agency_code=${agency}&site_no=${site_no} target='_blank'>Access Data</a><br />${waterAlertData}");	
 				var marker = new esri.Graphic(point, icon, attr, siteTemplate);
 		
 				// add symbol to graphics layer
@@ -1113,12 +1111,12 @@ function setMarkers_chkATAct(xml, ioargs) {
 				if (hasDataCode == "w2") {subscribeType = "qw";}				
 				
 				//setup subscribe button in the event the getIVdata function fails
-				var waterAlertData = "<hr><button data-dojo-type='dijit/form/Button' style='font-size:small;' onClick='window.open(\"" + "http://water.usgs.gov/wateralert/subscribe2/index.html?site_no=" + site_no + "&site_name=" + site_name + "&type_cd=" + subscribeType + "\")' type='button'>Subscribe to WaterAlert</button>";
+				var waterAlertData = "<hr><button data-dojo-type='dijit/form/Button' style='font-size:small;' onClick='window.open(\"" + "https://water.usgs.gov/wateralert/subscribe2/index.html?site_no=" + site_no + "&site_name=" + site_name + "&type_cd=" + subscribeType + "\")' type='button'>Subscribe to WaterAlert</button>";
 		
 				// build the symbol
 				var point = esri.geometry.geographicToWebMercator(new esri.geometry.Point(parseFloat(markers[nmarkers].getAttribute("lng")), parseFloat(markers[nmarkers].getAttribute("lat")),  new esri.SpatialReference({ wkid: 4326 })));
 				var attr = {"site_no":site_no, "site_name":site_name, "siteTypeText":siteTypeText, "agency":agency, "waterAlertData":waterAlertData };										
-				var siteTemplate = new esri.InfoTemplate("Site Information","<b>Site Number: </b>${site_no}<br /><b>Site Name: </b> ${site_name}<br /><b>Site Type: </b> ${siteTypeText}<br /><b>Agency: </b>${agency}<br /><a href=http://waterdata.usgs.gov/nwis/" + nwisDataType + "?agency_code=${agency}&site_no=${site_no} target='_blank'>Access Data</a><br />${waterAlertData}");		
+				var siteTemplate = new esri.InfoTemplate("Site Information","<b>Site Number: </b>${site_no}<br /><b>Site Name: </b> ${site_name}<br /><b>Site Type: </b> ${siteTypeText}<br /><b>Agency: </b>${agency}<br /><a href=" + waterdataURL + "/nwis/" + nwisDataType + "?agency_code=${agency}&site_no=${site_no} target='_blank'>Access Data</a><br />${waterAlertData}");		
 				var marker = new esri.Graphic(point, icon, attr, siteTemplate);
 		
 				// add symbol to graphics layer
@@ -1222,7 +1220,7 @@ function setCoLoMarkers(siteType, siteStatus, coloMarkers) {
 					+ '<br /><b>Site Name: </b>' + CurrName
 					+ '<br /><b>Site Type: </b>' + getSiteTypeText(CurrCode)
 					+ '<br /><b>Agency: </b>' + CurrAgency
-					+ '<br /><a href=http://waterdata.usgs.gov/nwis/inventory?agency_code=' + CurrAgency + '&site_no=' + CurrID + ' target="_blank">Access Data</a>'
+					+ '<br /><a href=' + waterdataURL + '/nwis/inventory?agency_code=' + CurrAgency + '&site_no=' + CurrID + ' target="_blank">Access Data</a>'
 					k = k + 1;
 				}
 
@@ -1232,7 +1230,7 @@ function setCoLoMarkers(siteType, siteStatus, coloMarkers) {
 					+ '<br /><b>Site Name: </b>' + NextName
 					+ '<br /><b>Site Type: </b>' + getSiteTypeText(NextCode)
 					+ '<br /><b>Agency: </b>' + NextAgency
-					+ '<br /><a href=http://waterdata.usgs.gov/nwis/inventory?agency_code=' + NextAgency + '&site_no=' + NextID + ' target="_blank">Access Data</a>'
+					+ '<br /><a href=' + waterdataURL + '/nwis/inventory?agency_code=' + NextAgency + '&site_no=' + NextID + ' target="_blank">Access Data</a>'
 
 				// increment both inner loop counters
 				k = k + 1;
@@ -1372,7 +1370,7 @@ function showUSGSOffices() {
 						// build the html popup info if user has not submitted a custom site
 						if (url == "") {
 							siteTemplate = new esri.InfoTemplate("USGS Water Office Information",
-							"<b>${office}</b><br />${city}, ${state} ${zip}<br /><b>Phone: </b>${phone}<br /><a href=http://" + state + ".water.usgs.gov target='_blank'>Water Science Center Home Page</a>");
+							"<b>${office}</b><br />${city}, ${state} ${zip}<br /><b>Phone: </b>${phone}<br /><a href=https://" + state + ".water.usgs.gov target='_blank'>Water Science Center Home Page</a>");
 							attr = {"office":office, "city":city, "state":state, "zip":zip, "phone":phone};
 						} else {
 							siteTemplate = new esri.InfoTemplate("USGS Water Office Information",
@@ -1831,7 +1829,7 @@ function doSearchName(srchCode) {
 
 	// locators for placenames and street addresses are from ESRI
 	if (srchCode == 1 ) {
-		locator = new esri.tasks.Locator("http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer");
+		locator = new esri.tasks.Locator("https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer");
 		// pass the parameters to the geocoding callback
 		var address = {
 			'SingleLine': srchText
@@ -1846,7 +1844,7 @@ function doSearchName(srchCode) {
 		locator.addressToLocations(options, placeNameCallBack);
 	}
 	else {
-		locator = new esri.tasks.Locator("http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer");
+		locator = new esri.tasks.Locator("https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer");
 		// pass the parameters to the geocoding callback
 		var address = {
 			'SingleLine': srchText
@@ -2132,7 +2130,7 @@ function formatSelect(gridValue) {
 }
 
 function formatNWISUrl(baseUrl) {
-	return "<a href=http://waterdata.usgs.gov/nwis/inventory?agency_code=" + baseUrl + " target='_blank'>Access Data</a>";
+	return "<a href=" + waterdataURL + "/nwis/inventory?agency_code=" + baseUrl + " target='_blank'>Access Data</a>";
 }
 
 function formatSiteType(siteAbb) {
@@ -2594,7 +2592,6 @@ function setExport(tabCode) {
 function makeExportFile() {
 
 	// need to build the URL for the exporter web service
-	// var expURL = "http://192.168.2.107/mapper/export/?"
 	var expURL = "./export/?";
 
 	// calculate bounding box for web service query
@@ -2657,10 +2654,10 @@ function createBasemapGallery() {
 
 	//add hydro basemap
 	var HydroBasemapLayer = new esri.dijit.BasemapLayer({
-	  url:"http://hydrology.esri.com/arcgis/rest/services/WorldHydroReferenceOverlay/MapServer"
+	  url:"https://hydrology.esri.com/arcgis/rest/services/WorldHydroReferenceOverlay/MapServer"
 	});
 	var TerrainBasemapLayer = new esri.dijit.BasemapLayer({
-	  url:"http://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer"
+	  url:"https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer"
 	});
 	
 	var hydroBasemap = new esri.dijit.Basemap({

@@ -44,20 +44,20 @@ function getQuery(queryURL) {
 	var curURL = window.location.protocol + "//" + window.location.hostname + "/" + window.location.pathname.split("/")[1]
 	
 	//check for the two possible urls, which each need to be proxied seperately
-	if (parser.hostname == "nwis.waterdata.usgs.gov") {
+	if (queryURL.indexOf("https://nwis.waterdata.usgs.gov") != -1) {
 		//proxy workaround
 		//---------------------
 		//baseURL is remapped to https://waterdata.usgs.gov using .htaccess
-		var baseURL = curURL + "/nwissitesmapper";
+		var baseURL = "https://maps.waterdata.usgs.gov/mapper/nwissitesmapper";
 		//this is the url chunk before the NWIS params can vary by user path into NWISweb
-		var appendURL = parser.pathname + "?";
+		var appendURL = queryURL.substring(31,queryURL.indexOf("?")) + "?";
 		//this is the parameter section of the NWIS URL
 		var NWISparams = queryURL.substring(queryURL.indexOf("?") + 1, queryURL.length);
 		//final URL
 		nwisWebURL_proxy = baseURL + appendURL + NWISparams
 		//get site coutner before doing anything else
 		nwisWebURL_proxy.replace(/&/g,"$");
-		var counterURL = curURL + "/sitecounter/?mapperURL=" + nwisWebURL_proxy.replace(/&/g,"$");
+		var counterURL = "https://maps.waterdata.usgs.gov/mapper/sitecounter/?mapperURL=" + nwisWebURL_proxy.replace(/&/g,"$");
 		var xmlLoadCounter = 
 		{
 			url: counterURL,
@@ -69,19 +69,19 @@ function getQuery(queryURL) {
 	}
 		
 //check for the two possible urls, which easy need to be proxied seperately
-	else if (parser.hostname == "waterdata.usgs.gov") {
+	else if (queryURL.indexOf("https://waterdata.usgs.gov") != -1) {
 		//proxy workaround
 		//---------------------
 		//baseURL is remapped to https://waterdata.usgs.gov using .htaccess
-		var baseURL = curURL + "/sitesmapper";
+		var baseURL = "https://maps.waterdata.usgs.gov/mapper/sitesmapper";
 		//this is the url chunk before the NWIS params can vary by user path into NWISweb
-		var appendURL = parser.pathname + "?";;
+		var appendURL = queryURL.substring(26,queryURL.indexOf("?")) + "?";
 		//this is the parameter section of the NWIS URL
 		var NWISparams = queryURL.substring(queryURL.indexOf("?") + 1, queryURL.length);
 		//final URL
 		nwisWebURL_proxy = baseURL + appendURL + NWISparams
 		//get site count -- have to replace & with $ or else URL wont get sent to cherrypy correctly
-		var counterURL = curURL + "/sitecounter/?mapperURL=" +  nwisWebURL_proxy.replace(/&/g,"$");
+		var counterURL = "https://maps.waterdata.usgs.gov/mapper/sitecounter/?mapperURL=" + nwisWebURL_proxy.replace(/&/g,"$");
 		var xmlLoadCounter = 
 		{
 			url: counterURL,

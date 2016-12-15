@@ -40,7 +40,7 @@ function showQueryParameters() {
 function getQuery(queryURL) {
 	
 	//check for the two possible urls, which each need to be proxied seperately
-	if (queryURL.indexOf("https://waterdata.usgs.gov") != -1) {
+	if (queryURL.indexOf("https://nwis.waterdata.usgs.gov") != -1) {
 		//proxy workaround
 		//---------------------
 		//baseURL is remapped to https://waterdata.usgs.gov using .htaccess

@@ -41,11 +41,15 @@ function getQuery(queryURL) {
 	
 	//check for the two possible urls, which each need to be proxied seperately
 	if (queryURL.indexOf("https://nwis.waterdata.usgs.gov") != -1) {
+
+		var parser = document.createElement('a');
+		parser.href = queryURL;
+
 		//proxy workaround
 		//---------------------
 		//baseURL is remapped to https://waterdata.usgs.gov using .htaccess
 		var baseURL = "https://maps.waterdata.usgs.gov/mapper/nwissitesmapper";
-		console.log(queryURL,queryURL.pathname)
+		console.log(parser.hostname,parser.pathname)
 		//this is the url chunk before the NWIS params can vary by user path into NWISweb
 		var appendURL = queryURL.substring(30,queryURL.indexOf("?")) + "?";
 		//this is the parameter section of the NWIS URL

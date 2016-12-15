@@ -41,13 +41,14 @@ function getQuery(queryURL) {
 
 	var parser = document.createElement('a');
 	parser.href = queryURL;
+	var curURL = window.location.protocol + "//" + window.location.hostname + "/" + window.location.pathname.split("/")[1]
 	
 	//check for the two possible urls, which each need to be proxied seperately
 	if (parser.hostname == "nwis.waterdata.usgs.gov") {
 		//proxy workaround
 		//---------------------
 		//baseURL is remapped to https://waterdata.usgs.gov using .htaccess
-		var baseURL = window.location.protocol + "//" + window.location.hostname + "/" + window.location.pathname.split("/")[1] + "/nwissitesmapper";
+		var baseURL = curURL + "/nwissitesmapper";
 		//this is the url chunk before the NWIS params can vary by user path into NWISweb
 		var appendURL = parser.pathname + "?";
 		//this is the parameter section of the NWIS URL
@@ -56,7 +57,7 @@ function getQuery(queryURL) {
 		nwisWebURL_proxy = baseURL + appendURL + NWISparams
 		//get site coutner before doing anything else
 		nwisWebURL_proxy.replace(/&/g,"$");
-		var counterURL = window.location.protocol + "//" + window.location.hostname + "/" + window.location.pathname.split("/")[1] +  + "/sitecounter/?mapperURL=" + nwisWebURL_proxy.replace(/&/g,"$");
+		var counterURL = curURL + "/sitecounter/?mapperURL=" + nwisWebURL_proxy.replace(/&/g,"$");
 		var xmlLoadCounter = 
 		{
 			url: counterURL,
@@ -72,7 +73,7 @@ function getQuery(queryURL) {
 		//proxy workaround
 		//---------------------
 		//baseURL is remapped to https://waterdata.usgs.gov using .htaccess
-		var baseURL = window.location.protocol + "//" + window.location.hostname + "/" + window.location.pathname.split("/")[1] +  + "/sitesmapper";
+		var baseURL = curURL + "/sitesmapper";
 		//this is the url chunk before the NWIS params can vary by user path into NWISweb
 		var appendURL = parser.pathname + "?";;
 		//this is the parameter section of the NWIS URL
@@ -80,7 +81,7 @@ function getQuery(queryURL) {
 		//final URL
 		nwisWebURL_proxy = baseURL + appendURL + NWISparams
 		//get site count -- have to replace & with $ or else URL wont get sent to cherrypy correctly
-		var counterURL = window.location.protocol + "//" + window.location.hostname + "/" + window.location.pathname.split("/")[1] + + "/sitecounter/?mapperURL=" + nwisWebURL_proxy.replace(/&/g,"$");
+		var counterURL = curURL + "/sitecounter/?mapperURL=" +  nwisWebURL_proxy.replace(/&/g,"$");
 		var xmlLoadCounter = 
 		{
 			url: counterURL,

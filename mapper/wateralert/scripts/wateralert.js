@@ -808,7 +808,7 @@ function setMarkers_chkSWAct(xml, ioargs) {
 				// build the symbol
 				var point = esri.geometry.geographicToWebMercator(new esri.geometry.Point(parseFloat(markers[nmarkers].getAttribute("lng")), parseFloat(markers[nmarkers].getAttribute("lat")),  new esri.SpatialReference({ wkid: 4326 })));
 				var attr = {"site_no":site_no, "site_name":site_name, "siteTypeText":siteTypeText, "agency":agency, "waterAlertData":waterAlertData };										
-				var siteTemplate = new esri.InfoTemplate("Site Information","<b>Site Number: </b>${site_no}<br /><b>Site Name: </b> ${site_name}<br /><b>Site Type: </b> ${siteTypeText}<br /><b>Agency: </b>${agency}<br /><a href=./nwis/" + nwisDataType + "?agency_code=${agency}&site_no=${site_no} target='_blank'>Access Data</a><br />${waterAlertData}");						
+				var siteTemplate = new esri.InfoTemplate("Site Information","<b>Site Number: </b>${site_no}<br /><b>Site Name: </b> ${site_name}<br /><b>Site Type: </b> ${siteTypeText}<br /><b>Agency: </b>${agency}<br /><a href=" + waterdataURL + "./nwis/" + nwisDataType + "?agency_code=${agency}&site_no=${site_no} target='_blank'>Access Data</a><br />${waterAlertData}");						
 				var marker = new esri.Graphic(point, icon, attr, siteTemplate);
 				
 				// add symbol to graphics layer

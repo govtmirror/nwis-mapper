@@ -45,6 +45,7 @@ function getQuery(queryURL) {
 		//---------------------
 		//baseURL is remapped to https://waterdata.usgs.gov using .htaccess
 		var baseURL = "https://maps.waterdata.usgs.gov/mapper/nwissitesmapper";
+		console.log(queryURL,queryURL.pathname)
 		//this is the url chunk before the NWIS params can vary by user path into NWISweb
 		var appendURL = queryURL.substring(30,queryURL.indexOf("?")) + "?";
 		//this is the parameter section of the NWIS URL

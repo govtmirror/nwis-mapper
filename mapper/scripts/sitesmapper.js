@@ -62,8 +62,10 @@ function getQuery(queryURL) {
 		{
 			url: counterURL,
 			headers: {
-				"X-Requested-With": null
+				'X-Requested-With': null,
+'				Content-Type': 'text/plain'
 			},
+			withCredentials: true,
 			handleAs: "text",
 			load: siteCounter,
 			error: errGet_NWISweb
@@ -89,8 +91,10 @@ function getQuery(queryURL) {
 		{
 			url: counterURL,
 			headers: {
-				"X-Requested-With": null
+				'X-Requested-With': null,
+				'Content-Type': 'text/plain'
 			},
+			withCredentials: true,
 			handleAs: "text",
 			load: siteCounter,
 			error: errGet_NWISweb
@@ -104,6 +108,10 @@ function getQuery(queryURL) {
 		{
 			url: queryURL,
 			handleAs: "xml",
+			headers: {
+				'X-Requested-With': null,
+				'Content-Type': 'text/plain'
+			},
 			load: draw_NWISweb_sites,
 			error: errGet_NWISweb
 		}
@@ -152,6 +160,10 @@ function load_NWISweb_sites() {
 	var xmlLoad = 
 	{
 		url: nwisWebURL_proxy,
+		headers: {
+			'X-Requested-With': null,
+			'Content-Type': 'text/plain'
+		},		
 		handleAs: "xml",
 		load: draw_NWISweb_sites,
 		error: errGet_NWISweb

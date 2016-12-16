@@ -54,9 +54,10 @@ function getQuery(queryURL) {
 		//this is the parameter section of the NWIS URL
 		var NWISparams = queryURL.substring(queryURL.indexOf("?") + 1, queryURL.length);
 		//final URL
-		nwisWebURL_proxy = baseURL + appendURL + NWISparams
+		//nwisWebURL_proxy = baseURL + appendURL + NWISparams
+		nwisWebURL_proxy = queryURL;
 		//get site coutner before doing anything else
-		var counterURL = curURL + "/sitecounter/?mapperURL=" + queryURL.replace(/&/g,"$");
+		var counterURL = curURL + "/sitecounter/?mapperURL=" + nwisWebURL_proxy.replace(/&/g,"$");
 		var xmlLoadCounter = 
 		{
 			url: counterURL,
@@ -82,9 +83,10 @@ function getQuery(queryURL) {
 		//this is the parameter section of the NWIS URL
 		var NWISparams = queryURL.substring(queryURL.indexOf("?") + 1, queryURL.length);
 		//final URL
-		nwisWebURL_proxy = baseURL + appendURL + NWISparams
+		//nwisWebURL_proxy = baseURL + appendURL + NWISparams
+		nwisWebURL_proxy = queryURL;
 		//get site count -- have to replace & with $ or else URL wont get sent to cherrypy correctly
-		var counterURL = curURL + "/sitecounter/?mapperURL=" + queryURL.replace(/&/g,"$");
+		var counterURL = curURL + "/sitecounter/?mapperURL=" +  nwisWebURL_proxy.replace(/&/g,"$");
 		var xmlLoadCounter = 
 		{
 			url: counterURL,

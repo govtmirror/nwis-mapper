@@ -136,7 +136,7 @@ function load_NWISweb_sites() {
 	//sitesMapperStandby.show();
 	var xmlLoad = 
 	{
-		url: nwisWebURL_proxy,	
+		url: nwisWebURL,	
 		handleAs: "xml",
 		headers: {
 			'X-Requested-With': null,

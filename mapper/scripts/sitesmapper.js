@@ -157,11 +157,7 @@ function load_NWISweb_sites() {
 	//sitesMapperStandby.show();
 	var xmlLoad = 
 	{
-		url: nwisWebURL_proxy,
-		headers: {
-			'X-Requested-With': null,
-			'Content-Type': 'text/plain'
-		},		
+		url: nwisWebURL_proxy,	
 		handleAs: "xml",
 		load: draw_NWISweb_sites,
 		error: errGet_NWISweb

@@ -38,7 +38,10 @@ function showQueryParameters() {
 }
 
 function getQuery(queryURL) {
-	
+
+	var parser = document.createElement('a');
+	parser.href = queryURL;
+
 	//check for the two possible urls, which each need to be proxied seperately
 	if (parser.hostname == "nwis.waterdata.usgs.gov") {
 		//get site coutner before doing anything else

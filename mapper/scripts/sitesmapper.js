@@ -56,7 +56,7 @@ function getQuery(queryURL) {
 		//final URL
 		nwisWebURL_proxy = baseURL + appendURL + NWISparams
 		//get site coutner before doing anything else
-		var counterURL = curURL + "/sitecounter/?mapperURL=" + queryURL;
+		var counterURL = curURL + "/sitecounter/?mapperURL=" + queryURL.replace(/&/g,"$");
 		var xmlLoadCounter = 
 		{
 			url: counterURL,
@@ -84,7 +84,7 @@ function getQuery(queryURL) {
 		//final URL
 		nwisWebURL_proxy = baseURL + appendURL + NWISparams
 		//get site count -- have to replace & with $ or else URL wont get sent to cherrypy correctly
-		var counterURL = curURL + "/sitecounter/?mapperURL=" +  queryURL;
+		var counterURL = curURL + "/sitecounter/?mapperURL=" + queryURL.replace(/&/g,"$");
 		var xmlLoadCounter = 
 		{
 			url: counterURL,

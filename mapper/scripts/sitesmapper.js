@@ -159,6 +159,10 @@ function load_NWISweb_sites() {
 	{
 		url: nwisWebURL_proxy,	
 		handleAs: "xml",
+		headers: {
+			'X-Requested-With': null,
+			'Content-Type': 'text/plain; charset=utf-8'
+		},
 		load: draw_NWISweb_sites,
 		error: errGet_NWISweb
 	}

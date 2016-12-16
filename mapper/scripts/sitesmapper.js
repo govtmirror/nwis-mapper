@@ -61,6 +61,9 @@ function getQuery(queryURL) {
 		var xmlLoadCounter = 
 		{
 			url: counterURL,
+			headers: {
+				"X-Requested-With": null
+			},
 			handleAs: "text",
 			load: siteCounter,
 			error: errGet_NWISweb
@@ -85,6 +88,9 @@ function getQuery(queryURL) {
 		var xmlLoadCounter = 
 		{
 			url: counterURL,
+			headers: {
+				"X-Requested-With": null
+			},
 			handleAs: "text",
 			load: siteCounter,
 			error: errGet_NWISweb

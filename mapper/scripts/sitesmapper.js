@@ -9,7 +9,7 @@ function startSM() {
 	//grab url
 	var url = window.location.href;
 	nwisWebURL = url.substring(url.indexOf("=") + 1, url.length);
-	getQuery(nwisWebURL);
+	getQuery();
 }
 
 function makeSitesMapperStandby() {
@@ -37,10 +37,10 @@ function showQueryParameters() {
 	document.getElementById("queryArgs").innerHTML = URLargsHTML;
 }
 
-function getQuery(queryURL) {
+function getQuery() {
 
 	var parser = document.createElement('a');
-	parser.href = queryURL;
+	parser.href = nwisWebURL;
 	var curURL = window.location.protocol + "//" + window.location.hostname + "/" + window.location.pathname.split("/")[1]
 	
 	//check for the two possible urls, which each need to be proxied seperately
@@ -83,7 +83,7 @@ function getQuery(queryURL) {
 	else {
 		var xmlLoad = 
 		{
-			url: queryURL,
+			url: nwisWebURL,
 			handleAs: "xml",
 			headers: {
 				'X-Requested-With': null,

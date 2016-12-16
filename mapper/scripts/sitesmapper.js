@@ -48,7 +48,7 @@ function getQuery(queryURL) {
 		//proxy workaround
 		//---------------------
 		//baseURL is remapped to https://waterdata.usgs.gov using .htaccess
-		var baseURL = curURL + "/nwissitesmapper";
+		var baseURL = curURL + "/nwissitesmapper/";
 		//this is the url chunk before the NWIS params can vary by user path into NWISweb
 		var appendURL = parser.pathname + "?";
 		//this is the parameter section of the NWIS URL
@@ -77,7 +77,7 @@ function getQuery(queryURL) {
 		//proxy workaround
 		//---------------------
 		//baseURL is remapped to https://waterdata.usgs.gov using .htaccess
-		var baseURL = curURL + "/sitesmapper";
+		var baseURL = curURL + "/sitesmapper/";
 		//this is the url chunk before the NWIS params can vary by user path into NWISweb
 		var appendURL = parser.pathname + "?";;
 		//this is the parameter section of the NWIS URL

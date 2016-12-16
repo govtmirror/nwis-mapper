@@ -1,8 +1,6 @@
 Options +FollowSymlinks
 RewriteEngine on
 RewriteRule ^nwis\/site\/(.*)$ https://waterservices.usgs.gov/nwis/site/$1 [P]
-RewriteRule ^sitesmapper\/(.*)$ https://waterdata.usgs.gov/$1 [P]
-RewriteRule ^nwissitesmapper\/(.*)$ https://nwis.waterdata.usgs.gov/$1 [P]
 RewriteRule ^wamapper\/(.*)$ https://waterservices.usgs.gov/nwis/iv/$1 [P]
 RewriteRule ^export\/(.*)$ https://localhost:8080/exportFile$1 [P]
 RewriteRule ^exportSM\/(.*)$ https://localhost:8081/exportFileSM$1 [P]
